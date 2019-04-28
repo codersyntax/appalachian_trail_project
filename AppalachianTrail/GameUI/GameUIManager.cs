@@ -30,15 +30,15 @@ namespace GameUI
             Delay();
             DisplayToUser(GameUIConstants.Title);
             Delay();
-            Console.WriteLine("You're about to embark on a 2,190 mile journey stretching from Maine to Georgia");
+            DisplayToUser("You're about to embark on a 2,190 mile journey stretching from Maine to Georgia");
             Delay();
-            Console.WriteLine("You've got a long road ahead so let's get started");
+            DisplayToUser("You've got a long road ahead so let's get started");
             Delay();
         }
 
         private string GetName()
         {
-            Console.Write("What's your name? ");
+            DisplayToUser("What's your name? ");
             return Console.ReadLine();
         }
 
