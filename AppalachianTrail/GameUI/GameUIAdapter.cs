@@ -3,18 +3,12 @@ using System.Threading;
 
 namespace GameUI
 {
-    public class GameUIManager
+    public class GameUIAdapter
     {
-        public GameUIManager()
-        {
-            StartGame();
-        }
-
-        public void StartGame()
+        public void Initialize()
         {
             SetGameTitle();
             Intro();
-            GetName();
         }
 
         private void SetGameTitle()
@@ -36,7 +30,7 @@ namespace GameUI
             Delay();
         }
 
-        private string GetName()
+        public string GetName()
         {
             DisplayToUser("What's your name? ");
             return Console.ReadLine();
