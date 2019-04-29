@@ -1,14 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using GameStorage.GameValues;
+using System.Collections.Generic;
 
 namespace GameLogic.Entities
 {
     internal class Backpack
     {
-        internal Dictionary<string, int> Items = new Dictionary<string, int>();
+        internal Dictionary<BackpackItem, int> Items = new Dictionary<BackpackItem, int>();
 
-        internal void AddItemToBackpack(string itemName, int itemCount)
+        internal int GetCountOfItems(BackpackItem itemName)
         {
             if (Items.ContainsKey(itemName))
+            {
+                return Items[itemName];
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        internal void AddItemToBackpack(BackpackItem itemName, int itemCount)
+        {
+            if (!Items.ContainsKey(itemName))
             {
                 Items.Add(itemName, itemCount);
             }
@@ -18,7 +31,7 @@ namespace GameLogic.Entities
             }
         }
 
-        internal void UseItemFromBackpack(string itemName, int amountUsed)
+        internal void UseItemFromBackpack(BackpackItem itemName, int amountUsed)
         {
             if(Items.ContainsKey(itemName))
             {

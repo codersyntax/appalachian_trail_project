@@ -2,8 +2,8 @@
 {
     public enum Pace
     {
-        Strenuous,
-        Steady,
-        Slow
+        Strenuous = 3,
+        Steady = 2,
+        Slow = 1
     }
 }

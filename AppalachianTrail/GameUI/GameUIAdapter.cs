@@ -84,9 +84,40 @@ namespace GameUI
             return Month.Unknown;
         }
 
+        public void DisplayTrailSegmentProgression(DateTime currentDate, Weather currentWeather, HealthStatus currentHealthStatus, int amountOfFood, int distanceToNextLocation, int totalDistanceTraveled)
+        {
+            ClearUserView();
+            DisplayToUser("Date: " + currentDate.ToLongDateString());
+            DisplayToUser("Weather: " + currentWeather.ToString());
+            DisplayToUser("Health: " + currentHealthStatus.ToString());
+            DisplayToUser("Food: " + amountOfFood.ToString());
+            DisplayToUser("Next landmark: " + distanceToNextLocation.ToString());
+            DisplayToUser("Miles traveled: " + totalDistanceTraveled.ToString());
+            DisplayToUser("Continue?");
+            Console.ReadLine();
+        }
+
+        public void DisplayLocationMenu(string newLocationName)
+        {
+            ClearUserView();
+            DisplayToUser("You have arrived at: " + newLocationName);
+            Console.ReadLine();
+        }
+
+        public void DisplayGameWin()
+        {
+            DisplayToUser("Congrats traveller! You made it to Georgia! Would you like to record your high score? ");
+            Console.ReadLine();
+        }
+
         private void DisplayToUser(string message)
         {
             Console.WriteLine(message);
+        }
+
+        private void ClearUserView()
+        {
+            Console.Clear();
         }
 
         private void Delay(int time = 2000)

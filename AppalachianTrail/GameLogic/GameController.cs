@@ -1,4 +1,5 @@
 ﻿using GameLogic.Entities;
+using GameStorage.GameValues;
 using GameUI;
 
 namespace GameLogic
@@ -14,12 +15,6 @@ namespace GameLogic
         public void Initialize()
         {
             InitializeGameUIAdapter();
-
-            //TODO: Add in logic to support selecting occupation
-
-            //TODO: Add in logic to start shopping process of filling out the hiker's backpack with supplies
-
-            //TODO: Transition into game loop once setup is done
         }
 
         public void StartSetup()
@@ -29,9 +24,45 @@ namespace GameLogic
             SetupHiker();
         }
 
+        public void StartShopping()
+        {
+            m_Hiker.Backpack.AddItemToBackpack(BackpackItem.OuncesOfFood, 1000);
+        }
+
         public void StartGameLoop()
         {
+            Location newLocation = m_Trail.GetNextLocation(m_Hiker.CurrentLocation);
 
+            while (newLocation != null)
+            {
+                m_Hiker.DistanceToNextLocation = m_Trail.GetDistanceToNextLocation(m_Hiker.CurrentLocation);
+
+                while (m_Hiker.DistanceToNextLocation > 0)
+                {
+                    UpdateGameUIToShowTravel();
+
+                    var distanceCoveredInDay = (int)m_Hiker.CurrentPace * 7;
+
+                    m_Hiker.DistanceToNextLocation -= distanceCoveredInDay;
+
+                    m_Hiker.TotalMilesTraveled += distanceCoveredInDay;
+
+                    m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
+
+                    m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
+                }
+
+                m_Hiker.CurrentLocation = newLocation;
+
+                m_Hiker.DistanceToNextLocation = 0;
+
+                UpdateGameUIToArriveAtLocation(newLocation);
+
+                newLocation = m_Trail.GetNextLocation(m_Hiker.CurrentLocation);
+
+            }
+
+            m_GameUIAdapter.DisplayGameWin();
         }
 
         private void InitializeGameUIAdapter()
@@ -47,6 +78,16 @@ namespace GameLogic
         private void SetupHiker()
         {
             m_Hiker = new Hiker(m_GameUIAdapter.GetName(), m_GameUIAdapter.GetOccupation(), m_GameUIAdapter.GetStartDate(), m_Trail.GetFirstTrailLocation());
+        }
+
+        private void UpdateGameUIToShowTravel()
+        {
+            m_GameUIAdapter.DisplayTrailSegmentProgression(m_Hiker.CurrentDate, m_Hiker.CurrentLocation.AverageWeatherForEachMonth[m_Hiker.CurrentDate.Month], m_Hiker.CurrentHealthStatus, m_Hiker.Backpack.GetCountOfItems(BackpackItem.OuncesOfFood), m_Hiker.DistanceToNextLocation, m_Hiker.TotalMilesTraveled);
+        }
+
+        private void UpdateGameUIToArriveAtLocation(Location newLocation)
+        {
+            m_GameUIAdapter.DisplayLocationMenu(newLocation.Name);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameStorage.GameValues;
+using System;
 using System.Collections.Generic;
 
 namespace GameLogic.Entities
@@ -18,7 +19,7 @@ namespace GameLogic.Entities
         }
 
         public Location GetNextLocation(Location currentLocation)
-        {
+         {
             foreach (TrailSegment segment in Map)
             {
                 if (segment.StartOfTrailSegment() == currentLocation)
@@ -44,23 +45,19 @@ namespace GameLogic.Entities
         private void BuildTrail()
         {
             //Testing out demo locations to make sure location traversal is working correctly, this section will eventually be removed and passed in from storage to build the trail data
-            List<string[]> TrailData = new List<string[]>();
-            string[] firstTrailSegment = new string[] { "Maine", "Virginia", "243" };
-            string[] secondTrailSegment = new string[] { "Virginia", "Tennessee", "42543" };
-            string[] thirdTrailSegment = new string[] { "Tennessee", "Georgia", "43243" };
-            TrailData.Add(firstTrailSegment);
-            TrailData.Add(secondTrailSegment);
-            TrailData.Add(thirdTrailSegment);
+            var firstLocation = new Location("Maine", new Weather[12] { Weather.Cold, Weather.Cold, Weather.Cold, Weather.Chilly, Weather.Chilly, Weather.Mild, Weather.Warm, Weather.Mild, Weather.Mild, Weather.Chilly, Weather.Cold, Weather.Cold });
+            var secondLocation = new Location("Virginia", new Weather[12] { Weather.Cold, Weather.Cold, Weather.Cold, Weather.Chilly, Weather.Chilly, Weather.Mild, Weather.Warm, Weather.Mild, Weather.Mild, Weather.Chilly, Weather.Cold, Weather.Cold });
+            var firstToSecondEdgeDistance = 214;
+            AddNextLocationStop(firstLocation, secondLocation, firstToSecondEdgeDistance);
 
-            foreach (var segment in TrailData)
-            {
-                AddNextLocationStop(segment[0], segment[1], segment[2]);
-            }
+            var thirdLocation = new Location("Georgia", new Weather[12] { Weather.Cold, Weather.Chilly, Weather.Chilly, Weather.Warm, Weather.Hot, Weather.Hot, Weather.Hot, Weather.Warm, Weather.Warm, Weather.Mild, Weather.Chilly, Weather.Chilly });
+            var secondToThirdEdgeDistance = 132;
+            AddNextLocationStop(secondLocation, thirdLocation, secondToThirdEdgeDistance);
         }
 
-        private void AddNextLocationStop(string startLocation, string nextLocation, string distanceToNextLocation)
+        private void AddNextLocationStop(Location startLocation, Location nextLocation, int distanceToNextLocation)
         {
-            Map.Add(new TrailSegment(new Location(startLocation), new Location(nextLocation), Int32.Parse(distanceToNextLocation)));
+            Map.Add(new TrailSegment(startLocation, nextLocation, distanceToNextLocation));
         }
     }
 }

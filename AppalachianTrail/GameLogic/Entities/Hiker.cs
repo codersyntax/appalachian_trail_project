@@ -19,7 +19,13 @@ namespace GameLogic.Entities
 
         internal Ration CurrentFoodRation { get; set; }
 
+        internal HealthStatus CurrentHealthStatus { get; set; }
+
         internal int Wallet { get; set; }
+        
+        internal int DistanceToNextLocation { get; set; }
+
+        internal int TotalMilesTraveled { get; set; }
 
         internal Hiker(string name, Occupation occupation, Month startDate, Location startLocation)
         {
@@ -37,7 +43,11 @@ namespace GameLogic.Entities
 
             CurrentFoodRation = Ration.Filling;
 
+            CurrentHealthStatus = HealthStatus.Good;
+
             Backpack = new Backpack();
+
+            TotalMilesTraveled = 0;
         }
     }
 }

@@ -5,8 +5,10 @@
         static void Main(string[] args)
         {
             GameController gameController = new GameController();
-            //gameController.Initialize();
+            gameController.Initialize();
             gameController.StartSetup();
+            gameController.StartShopping();
+            gameController.StartGameLoop();
         }
     }
 }
