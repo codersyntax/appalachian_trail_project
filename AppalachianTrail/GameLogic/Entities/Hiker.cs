@@ -27,6 +27,8 @@ namespace GameLogic.Entities
 
             Occupation = occupation;
 
+            Wallet = (int)Occupation;
+
             CurrentLocation = startLocation;
 
             CurrentDate = new DateTime(2019, (int)startDate, 1, 8, 0, 0);

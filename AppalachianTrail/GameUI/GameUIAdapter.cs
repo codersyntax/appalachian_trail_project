@@ -62,7 +62,7 @@ namespace GameUI
 
         public Month GetStartDate()
         {
-            DisplayToUser("When would you like to begin your trek on the AT? [1-12] ");
+            DisplayToUser("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
             string startDate = Console.ReadLine();
             bool isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
             Int32.TryParse(startDate, out int numValueOfStartDate);
@@ -73,7 +73,7 @@ namespace GameUI
             while (!isValidStartDate)
             {
                 DisplayToUser(startDate + " is not a valid response, please try again...");
-                DisplayToUser("When would you like to begin your trek on the AT? [1-12] ");
+                DisplayToUser("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
                 startDate = Console.ReadLine();
                 isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
                 if (isValidStartDate)
