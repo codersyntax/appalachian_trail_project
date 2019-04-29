@@ -15,5 +15,7 @@
 ";
 
         public const string ConsoleTitle = "The Appalachian Trail";
+        public const string ShopItems = "1. Water Bottle \t$25 \n" +
+                                        "                       ";
     }
 }

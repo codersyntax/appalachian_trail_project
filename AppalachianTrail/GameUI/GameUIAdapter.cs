@@ -124,5 +124,16 @@ namespace GameUI
         {
             Thread.Sleep(time);
         }
+
+        public void Shopping (int wallet)
+        {
+            DisplayToUser("Welcome to the supply store. What would you like to purchase?");
+            DisplayToUser("We have the following items in stock.");
+            DisplayToUser(GameUIConstants.ShopItems);
+            DisplayToUser("You currently have" + wallet + "to spend.");
+            DisplayToUser("To select an item, ____");
+            DisplayToUser("Would you like to purchase anything else?")
+            
+        }
     }
 }
