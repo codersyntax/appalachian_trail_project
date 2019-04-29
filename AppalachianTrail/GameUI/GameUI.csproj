@@ -50,6 +50,12 @@
     <Compile Include="GameUIAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameStorage\GameStorage.csproj">
+      <Project>{2B9A0DEA-1752-4801-B41E-78AF13AE0DD1}</Project>
+      <Name>GameStorage</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

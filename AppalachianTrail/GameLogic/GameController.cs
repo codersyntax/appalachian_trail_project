@@ -29,6 +29,11 @@ namespace GameLogic
             SetupHiker();
         }
 
+        public void StartGameLoop()
+        {
+
+        }
+
         private void InitializeGameUIAdapter()
         {
             m_GameUIAdapter.Initialize();
@@ -41,7 +46,7 @@ namespace GameLogic
 
         private void SetupHiker()
         {
-            m_Hiker = new Hiker(m_GameUIAdapter.GetName(), m_Trail.GetFirstTrailLocation());
+            m_Hiker = new Hiker(m_GameUIAdapter.GetName(), m_GameUIAdapter.GetOccupation(), m_GameUIAdapter.GetStartDate(), m_Trail.GetFirstTrailLocation());
         }
     }
 }

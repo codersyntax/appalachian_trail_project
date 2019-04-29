@@ -53,6 +53,10 @@
     <Compile Include="GameController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GameStorage\GameStorage.csproj">
+      <Project>{2B9A0DEA-1752-4801-B41E-78AF13AE0DD1}</Project>
+      <Name>GameStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GameUI\GameUI.csproj">
       <Project>{3571B81C-2480-4743-AF43-677C9228FFB4}</Project>
       <Name>GameUI</Name>

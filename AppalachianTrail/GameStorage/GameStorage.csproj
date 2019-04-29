@@ -40,6 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameValues\BackpackItem.cs" />
+    <Compile Include="GameValues\HealthStatus.cs" />
+    <Compile Include="GameValues\Month.cs" />
+    <Compile Include="GameValues\Occupation.cs" />
+    <Compile Include="GameValues\Pace.cs" />
+    <Compile Include="GameValues\Ration.cs" />
+    <Compile Include="GameValues\Weather.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
