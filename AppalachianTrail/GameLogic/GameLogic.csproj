@@ -46,6 +46,8 @@
     <Compile Include="Entities\Backpack.cs" />
     <Compile Include="Entities\Hiker.cs" />
     <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\SetupShopping.cs" />
+    <Compile Include="Entities\Shopping.cs" />
     <Compile Include="Entities\Trail.cs" />
     <Compile Include="Entities\TrailSegment.cs" />
     <Compile Include="Program.cs" />

@@ -8,9 +8,19 @@ namespace GameLogic.Entities
     {
         public Dictionary<BackpackItem, int> ShoppingCart = new Dictionary<BackpackItem, int>();
 
+        private GameUIAdapter m_GameUIAdapter;
+
+        private Hiker m_Hiker;
+
         public SetupShopping(GameUIAdapter gameAdapter, Hiker hiker)
         {
-            gameAdapter.StartShopping(hiker.Wallet);
+            m_GameUIAdapter = gameAdapter;
+            m_Hiker = hiker;
+        }
+
+        public void Initialize()
+        {
+            m_GameUIAdapter.Shopping(m_Hiker.Wallet);
         }
     }
 }

@@ -65,7 +65,8 @@ namespace GameUI
             DisplayToUser("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
             string startDate = Console.ReadLine();
             bool isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
-            Int32.TryParse(startDate, out int numValueOfStartDate);
+            int numValueOfStartDate = 0;
+            Int32.TryParse(startDate, out numValueOfStartDate);
             if (isValidStartDate || numValueOfStartDate != 0)
             {
                 return (Month)Enum.Parse(typeof(Month), startDate);
