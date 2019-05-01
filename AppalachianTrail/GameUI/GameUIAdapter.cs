@@ -101,8 +101,23 @@ namespace GameUI
         {
             ClearUserView();
             DisplayToUser("You have arrived at: " + newLocationName);
-            DisplayToUser("Would you like to purchase some supplies?");
+            int userAnswer;
+            bool isValidAnswer = DisplayLocationOptions(out userAnswer);
+            while (!isValidAnswer)
+            {
+                isValidAnswer = DisplayLocationOptions(out userAnswer);
+            }
             Console.ReadLine();
+        }
+
+        private bool DisplayLocationOptions(out int numValueOfUserAnswer)
+        {
+            DisplayToUser("Enter 1 to purchase some supplies");
+            DisplayToUser("Enter 2 to rest");
+            DisplayToUser("Enter 3 to speak with the townsfolk");
+            string userAnswer = Console.ReadLine();
+            bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
+            return isValidAnswer;
         }
 
         public void DisplayGameWin()
