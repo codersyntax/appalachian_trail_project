@@ -144,11 +144,13 @@ namespace GameUI
 
         public void Shopping (int wallet)
         {
+            ClearUserView();
             DisplayToUser("Welcome to the supply store. What would you like to purchase?");
             DisplayToUser("We have the following items in stock.");
             DisplayToUser(GameUIConstants.ShopItems);
-            DisplayToUser("You currently have" + wallet + "to spend.");
+            DisplayToUser("You currently have " + wallet + " to spend.");
             DisplayToUser("Select an item to purchase");
+            Console.ReadLine();
             DisplayToUser("How many would you like to purchase?");
             DisplayToUser("Would you like to purchase anything else?");
             
