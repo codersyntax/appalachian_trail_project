@@ -3,7 +3,7 @@ using System;
 
 namespace GameLogic.Entities
 {
-    internal class Hiker
+    public class Hiker
     {
         internal string Name { get; set; }
 
@@ -21,7 +21,7 @@ namespace GameLogic.Entities
 
         internal HealthStatus CurrentHealthStatus { get; set; }
 
-        internal int Wallet { get; set; }
+        public int Wallet { get; set; }
         
         internal int DistanceToNextLocation { get; set; }
 

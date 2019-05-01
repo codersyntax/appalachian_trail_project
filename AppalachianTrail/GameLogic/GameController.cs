@@ -22,6 +22,14 @@ namespace GameLogic
             SetupTrail();
 
             SetupHiker();
+
+            SetupShopping();
+        }
+
+        public void SetupShopping()
+        {
+            SetupShopping setupShopping = new SetupShopping(m_GameUIAdapter, m_Hiker);
+            setupShopping.Start();
         }
 
         public void StartShopping()
