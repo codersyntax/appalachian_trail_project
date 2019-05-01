@@ -1,1 +1,10 @@
-﻿
+﻿Dahlonega, Ga/cold/cold/mild/warm/hot/hot/hot/hot/warm/mild/mild/chilly 
+Franklin, NC/cold/cold/chilly/mild/mild/warm/hot/hot/mild/cold/cold/cold  
+Unicoi County, TN/cold/cold/chilly/mild/warm/warm/hot/hot/mild/cold/cold/cold
+Damascus, VA/cold/cold/chilly/mild/mild/warm/warm/warm/mild/cold/cold/cold
+Round Hill, VA/cold/cold/chilly/mild/mild/warm/warm/warm/mild/cold/cold/cold
+Bolivar,WV/cold/cold/chilly/chilly/chilly/warm/hot/warm/mild/cold/cold/cold
+Duncannon, PA/cold/cold/chilly/mild/mild/mild/hot/hot/mild/cold/cold/cold
+Warren County, NJ/cold/cold/chilly/mild/mild/warm/hot/hot/mild/cold/cold/cold
+Warwick, NY/cold/cold/chilly/mild/mild/mild/hot/warm/mild/cold/cold/cold
+Rangeley, ME/cold/cold/chilly/chilly/chilly/warm/hot/mild/chilly/cold/cold/cold
