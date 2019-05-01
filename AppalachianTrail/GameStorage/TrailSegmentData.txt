@@ -1,9 +1,9 @@
 ﻿Dahlonega, Ga/Franklin, NC/56 miles 
-Franklin, NC/Unicoi County, TN/ 86.7 miles 
-Unicoi County, TN/Damascus, VA/52.6 miles
-Damascus, VA/Round Hill, VA/279.3 miles
-Round Hill, VA/Bolivar,WV/14.5 miles
-Bolivar,WV/Duncannon, PA/13.6 miles
-Duncannon, PA/Warren County, NJ/83.6 miles
-Warren County, NJ/Warwick, NY/116 miles
-Warwick, NY/Rangeley, ME/405.3 miles
+Franklin, NC/Unicoi County, TN/ 86
+Unicoi County, TN/Damascus, VA/52
+Damascus, VA/Round Hill, VA/279
+Round Hill, VA/Bolivar,WV/14
+Bolivar,WV/Duncannon, PA/13
+Duncannon, PA/Warren County, NJ/83
+Warren County, NJ/Warwick, NY/116
+Warwick, NY/Rangeley, ME/405.3
