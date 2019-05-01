@@ -101,6 +101,7 @@ namespace GameUI
         {
             ClearUserView();
             DisplayToUser("You have arrived at: " + newLocationName);
+            DisplayToUser("Would you like to purchase some supplies?");
             Console.ReadLine();
         }
 
@@ -132,7 +133,7 @@ namespace GameUI
             DisplayToUser(GameUIConstants.ShopItems);
             DisplayToUser("You currently have" + wallet + "to spend.");
             DisplayToUser("To select an item, ____");
-            DisplayToUser("Would you like to purchase anything else?")
+            DisplayToUser("Would you like to purchase anything else?");
             
         }
     }
