@@ -132,7 +132,8 @@ namespace GameUI
             DisplayToUser("We have the following items in stock.");
             DisplayToUser(GameUIConstants.ShopItems);
             DisplayToUser("You currently have" + wallet + "to spend.");
-            DisplayToUser("To select an item, ____");
+            DisplayToUser("Select an item to purchase");
+            DisplayToUser("How many would you like to purchase?");
             DisplayToUser("Would you like to purchase anything else?");
             
         }
