@@ -6,6 +6,7 @@
         SetsOfClothing = 10,
         Tent = 200,
         OuncesOfFood = 1,
-        SleepingBag = 100
+        SleepingBag = 100,
+        None
     }
 }
