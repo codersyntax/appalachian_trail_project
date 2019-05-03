@@ -17,7 +17,7 @@
         public const string ConsoleTitle = "The Appalachian Trail";
         public const string ShopItems = "1. Water Bottle \t$25 \n" +
                                         "2. Sets Of Clothing \t$10 \n" +
-                                        "3. Ten \t$200 \n" +
+                                        "3. Ten \t\t$200 \n" +
                                         "4. Ounces of Food \t$1 \n" +
                                         "5. Sleeping Bag \t$100 \n";
 
