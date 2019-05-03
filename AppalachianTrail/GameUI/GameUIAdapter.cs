@@ -192,5 +192,11 @@ namespace GameUI
             Int32.TryParse(purchaseAmountString, out itemPurchaseCount);
             return purchasedItem;
         }
+
+        public void DisplayInsufficientFunds()
+        {
+            DisplayToUser("You don't have enough money for that");
+            Console.ReadLine();
+        }
     }
 }
