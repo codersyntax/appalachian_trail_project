@@ -42,6 +42,15 @@ namespace GameStorage
             }
             return completeSegmentData;
         }
+        public static void AddScoreToHighScore(int score)
+        {
+            using (StreamWriter sw = File.AppendText(Path.Combine(Environment.CurrentDirectory, "HighScoreData.txt")))
+            {
+                sw.WriteLine(score.ToString());
+               
+            }
+
+        }
         
     }
 }
