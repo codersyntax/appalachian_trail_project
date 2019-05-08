@@ -43,7 +43,7 @@ namespace GameLogic
         {
             int userLocationResponse = UpdateGameUIToArriveAtLocation(m_Hiker.CurrentLocation);
 
-            while (userLocationResponse != 4)
+            while (userLocationResponse != (int)LocationResponse.Continue)
             {
                 userLocationResponse = UpdateGameUIToArriveAtLocation(m_Hiker.CurrentLocation);
             }
@@ -58,13 +58,26 @@ namespace GameLogic
                 {
                     int userTravelResponse = UpdateGameUIToShowTravel();
 
-                    if (userTravelResponse == 1)
+                    while(userTravelResponse != (int)TravelResponse.Continue)
+                    {
+                        if (userTravelResponse == (int)TravelResponse.Rest)
+                        {
+                            ApplyGameLoopRestDeductions();
+                        }
+                        if (userTravelResponse == (int)TravelResponse.ChangePace)
+                        {
+                            DeterminePaceChange();
+                            userTravelResponse = UpdateGameUIToShowTravel();
+                        }
+                        if (userTravelResponse == (int)TravelResponse.ChangeRation)
+                        {
+                            DetermineRationChange();
+                            userTravelResponse = UpdateGameUIToShowTravel();
+                        }
+                    }
+                    if (userTravelResponse == (int)TravelResponse.Continue)
                     {
                         ApplyGameLoopContinueDeductions();
-                    }
-                    if(userTravelResponse == 2)
-                    {
-                        ApplyGameLoopRestDeductions();
                     }
                 }
 
@@ -74,7 +87,7 @@ namespace GameLogic
 
                 userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
                 
-                while(userLocationResponse != 4)
+                while(userLocationResponse != (int)LocationResponse.Continue)
                 {
                     userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
                 }
@@ -117,17 +130,16 @@ namespace GameLogic
         {
             int userResponse = m_GameUIAdapter.DisplayLocationMenu(newLocation.Name);
 
-            if(userResponse == 1)
+            if(userResponse == (int)LocationResponse.Shop)
             {
                 m_SetupShopping.StartShopping();
             }
-            if(userResponse == 2)
+            if(userResponse == (int)LocationResponse.Rest)
             {
                 m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
             }
-            if(userResponse == 3)
+            if(userResponse == (int)LocationResponse.Talk)
             {
-                m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(2);
                 //talk to towns people
             }
             return userResponse;
@@ -143,14 +155,34 @@ namespace GameLogic
 
             m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
 
-            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
         }
 
         private void ApplyGameLoopRestDeductions()
         {
-            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
 
             m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
+        }
+
+        private void DeterminePaceChange()
+        {
+            Pace pace = m_GameUIAdapter.GetPaceChange(m_Hiker.CurrentPace);
+            while (pace == Pace.None)
+            {
+                pace = m_GameUIAdapter.GetPaceChange(m_Hiker.CurrentPace);
+            }
+            m_Hiker.CurrentPace = pace;
+        }
+
+        private void DetermineRationChange()
+        {
+            Ration ration = m_GameUIAdapter.GetRationChange(m_Hiker.CurrentFoodRation);
+            while (ration == Ration.None)
+            {
+                ration = m_GameUIAdapter.GetRationChange(m_Hiker.CurrentFoodRation);
+            }
+            m_Hiker.CurrentFoodRation = ration;
         }
     }
 }

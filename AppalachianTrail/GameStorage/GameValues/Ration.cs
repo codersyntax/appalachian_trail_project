@@ -2,8 +2,9 @@
 {
     public enum Ration
     {
-        Filling,
-        Meager,
-        BareBones
+        Filling = 5,
+        Meager = 4,
+        BareBones = 3,
+        None = 0
     }
 }

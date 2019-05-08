@@ -4,6 +4,7 @@
     {
         Strenuous = 3,
         Steady = 2,
-        Slow = 1
+        Slow = 1,
+        None = 0
     }
 }

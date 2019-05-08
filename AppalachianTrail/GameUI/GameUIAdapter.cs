@@ -109,6 +109,8 @@ namespace GameUI
         {
             DisplayToUser("Enter 1 to continue on the trail");
             DisplayToUser("Enter 2 to rest");
+            DisplayToUser("Enter 3 to change pace");
+            DisplayToUser("Enter 4 to change food rations");
             AskUserChoice("Your choice: ");
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
@@ -243,6 +245,58 @@ namespace GameUI
         {
             DisplayToUser("You don't have enough money for that");
             Console.ReadLine();
+        }
+
+        public Pace GetPaceChange(Pace currentPace)
+        {
+            DisplayToUser("What pace would you like to hike at?");
+            DisplayToUser("[1] Strenuous / [2] Steady / [3] Slow");
+            DisplayToUser("Your current pace: " + currentPace.ToString());
+            AskUserChoice("Your choice: ");
+            string userResponse = Console.ReadLine();
+            Pace pace;
+            switch (userResponse)
+            {
+                case "1":
+                    pace = Pace.Strenuous;
+                    break;
+                case "2":
+                    pace = Pace.Steady;
+                    break;
+                case "3":
+                    pace = Pace.Slow;
+                    break;
+                default:
+                    pace = Pace.None;
+                    break;
+            }
+            return pace;
+        }
+
+        public Ration GetRationChange(Ration currentRation)
+        {
+            DisplayToUser("How much food rations would you like to consume?");
+            DisplayToUser("[1] Filling / [2] Meager / [3] Bare bones");
+            DisplayToUser("Your current food rations: " + currentRation);
+            AskUserChoice("Your choice: ");
+            string userResponse = Console.ReadLine();
+            Ration ration;
+            switch (userResponse)
+            {
+                case "1":
+                    ration = Ration.Filling;
+                    break;
+                case "2":
+                    ration = Ration.Meager;
+                    break;
+                case "3":
+                    ration = Ration.BareBones;
+                    break;
+                default:
+                    ration = Ration.None;
+                    break;
+            }
+            return ration;
         }
     }
 }

@@ -47,10 +47,12 @@
     <Compile Include="GameDataAdapter.cs" />
     <Compile Include="GameValues\BackpackItem.cs" />
     <Compile Include="GameValues\HealthStatus.cs" />
+    <Compile Include="GameValues\LocationResponse.cs" />
     <Compile Include="GameValues\Month.cs" />
     <Compile Include="GameValues\Occupation.cs" />
     <Compile Include="GameValues\Pace.cs" />
     <Compile Include="GameValues\Ration.cs" />
+    <Compile Include="GameValues\TravelResponse.cs" />
     <Compile Include="GameValues\Weather.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\TrailSegment.cs" />
