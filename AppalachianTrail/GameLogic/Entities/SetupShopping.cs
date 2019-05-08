@@ -20,7 +20,26 @@ namespace GameLogic.Entities
 
         public void Initialize()
         {
-            m_GameUIAdapter.Shopping(m_Hiker.Wallet);
+            while(m_GameUIAdapter.StartShopping(m_Hiker.Wallet))
+            {
+                GetShoppingItem();
+            }
+        }
+
+        public void GetShoppingItem()
+        {
+            int purchaseAmount = 0;
+            BackpackItem itemPurchased = m_GameUIAdapter.PurchaseShoppingItem(out purchaseAmount);
+            int purchaseTotal = (int)itemPurchased * purchaseAmount;
+            if (purchaseTotal > m_Hiker.Wallet)
+            {
+                m_GameUIAdapter.DisplayInsufficientFunds();
+            }
+            else
+            {
+                m_Hiker.Wallet -= (int)itemPurchased * purchaseAmount;
+                ShoppingCart.Add(itemPurchased, purchaseAmount);
+            }
         }
     }
 }

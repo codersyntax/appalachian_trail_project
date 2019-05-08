@@ -142,18 +142,61 @@ namespace GameUI
             Thread.Sleep(time);
         }
 
-        public void Shopping (int wallet)
+        public bool StartShopping (int wallet)
         {
             ClearUserView();
             DisplayToUser("Welcome to the supply store. What would you like to purchase?");
             DisplayToUser("We have the following items in stock.");
             DisplayToUser(GameUIConstants.ShopItems);
             DisplayToUser("You currently have " + wallet + " to spend.");
+            DisplayToUser("Would you like to purchase anything? (Y/N)");
+            var purchaseResponse = Console.ReadLine().ToLower();
+            if(purchaseResponse == "y")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public BackpackItem PurchaseShoppingItem(out int itemPurchaseCount)
+        {
             DisplayToUser("Select an item to purchase");
-            Console.ReadLine();
+            string purchasedItemString = Console.ReadLine();
+            BackpackItem purchasedItem;
+            switch(purchasedItemString)
+            {
+                case "1":
+                    purchasedItem = BackpackItem.WaterBottle;
+                    break;
+                case "2":
+                    purchasedItem = BackpackItem.SetsOfClothing;
+                    break;
+                case "3":
+                    purchasedItem = BackpackItem.Tent;
+                    break;
+                case "4":
+                    purchasedItem = BackpackItem.OuncesOfFood;
+                    break;
+                case "5":
+                    purchasedItem = BackpackItem.SleepingBag;
+                    break;
+                default:
+                    purchasedItem = BackpackItem.None;
+                    break;
+            }
             DisplayToUser("How many would you like to purchase?");
-            DisplayToUser("Would you like to purchase anything else?");
-            
+            string purchaseAmountString = Console.ReadLine();
+            Int32.TryParse(purchaseAmountString, out itemPurchaseCount);
+            return purchasedItem;
+        }
+
+        public void DisplayInsufficientFunds()
+        {
+            DisplayToUser("You don't have enough money for that");
+            Console.ReadLine();
         }
     }
 }
