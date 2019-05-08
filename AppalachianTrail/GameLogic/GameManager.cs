@@ -41,6 +41,13 @@ namespace GameLogic
 
         public void StartGameLoop()
         {
+            int userLocationResponse = UpdateGameUIToArriveAtLocation(m_Hiker.CurrentLocation);
+
+            while (userLocationResponse != 4)
+            {
+                userLocationResponse = UpdateGameUIToArriveAtLocation(m_Hiker.CurrentLocation);
+            }
+
             Location newLocation = m_Trail.GetNextLocation(m_Hiker.CurrentLocation);
 
             while (newLocation != null)
@@ -65,7 +72,7 @@ namespace GameLogic
 
                 m_Hiker.DistanceToNextLocation = 0;
 
-                int userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
+                userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
                 
                 while(userLocationResponse != 4)
                 {

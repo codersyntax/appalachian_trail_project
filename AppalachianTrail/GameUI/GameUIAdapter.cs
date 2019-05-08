@@ -26,7 +26,7 @@ namespace GameUI
             Delay();
             DisplayToUser(GameUIConstants.Title);
             Delay();
-            DisplayToUser("You're about to embark on a 2,190 mile journey stretching from Maine to Georgia");
+            DisplayToUser("You're about to embark on a 2,190 mile journey stretching from Georgia to Maine");
             Delay();
             DisplayToUser("You've got a long road ahead so let's get started");
             Delay();
@@ -118,7 +118,7 @@ namespace GameUI
         public int DisplayLocationMenu(string newLocationName)
         {
             ClearUserView();
-            DisplayToUser("\nYou have arrived at: " + newLocationName);
+            DisplayToUser("\n\tWelcome to " + newLocationName + "!\n");
             int userAnswer;
             bool isValidAnswer = DisplayLocationOptions(out userAnswer);
             while (!isValidAnswer)
@@ -142,7 +142,7 @@ namespace GameUI
 
         public void DisplayGameWin()
         {
-            DisplayToUser("Congrats traveller! You made it to Georgia! Would you like to record your high score? ");
+            DisplayToUser("Congrats traveller! You made it to Rangeley, ME! Would you like to record your high score? ");
             Console.ReadLine();
         }
 
