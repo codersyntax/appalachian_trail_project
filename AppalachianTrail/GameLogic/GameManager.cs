@@ -47,17 +47,16 @@ namespace GameLogic
 
                 while (m_Hiker.DistanceToNextLocation > 0)
                 {
-                    UpdateGameUIToShowTravel();
+                    int userResponse = UpdateGameUIToShowTravel();
 
-                    var distanceCoveredInDay = (int)m_Hiker.CurrentPace * 4;
-
-                    m_Hiker.DistanceToNextLocation -= distanceCoveredInDay;
-
-                    m_Hiker.TotalMilesTraveled += distanceCoveredInDay;
-
-                    m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
-
-                    m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
+                    if (userResponse == 1)
+                    {
+                        ApplyGameLoopContinueDeductions();
+                    }
+                    if(userResponse == 2)
+                    {
+                        ApplyGameLoopRestDeductions();
+                    }
                 }
 
                 m_Hiker.CurrentLocation = newLocation;
@@ -95,14 +94,32 @@ namespace GameLogic
             m_Hiker = new Hiker(m_GameUIAdapter.GetName(), m_GameUIAdapter.GetOccupation(), m_GameUIAdapter.GetStartDate(), m_Trail.GetFirstTrailLocation());
         }
 
-        private void UpdateGameUIToShowTravel()
+        private int UpdateGameUIToShowTravel()
         {
-            m_GameUIAdapter.DisplayTrailSegmentProgression(m_Hiker.CurrentDate, m_Hiker.CurrentLocation.AverageWeatherForEachMonth[m_Hiker.CurrentDate.Month], m_Hiker.CurrentHealthStatus, m_Hiker.Backpack.GetCountOfItems(BackpackItem.OuncesOfFood), m_Hiker.DistanceToNextLocation, m_Hiker.TotalMilesTraveled);
+            return m_GameUIAdapter.DisplayTrailSegmentProgression(m_Hiker.CurrentDate, m_Hiker.CurrentLocation.AverageWeatherForEachMonth[m_Hiker.CurrentDate.Month], m_Hiker.CurrentHealthStatus, m_Hiker.Backpack.GetCountOfItems(BackpackItem.OuncesOfFood), m_Hiker.DistanceToNextLocation, m_Hiker.TotalMilesTraveled);
         }
 
         private void UpdateGameUIToArriveAtLocation(Location newLocation)
         {
             m_GameUIAdapter.DisplayLocationMenu(newLocation.Name);
+        }
+
+        private void ApplyGameLoopContinueDeductions()
+        {
+            var distanceCoveredInDay = (int)m_Hiker.CurrentPace * 4;
+
+            m_Hiker.DistanceToNextLocation -= distanceCoveredInDay;
+
+            m_Hiker.TotalMilesTraveled += distanceCoveredInDay;
+
+            m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
+
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
+        }
+
+        private void ApplyGameLoopRestDeductions()
+        {
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
         }
     }
 }

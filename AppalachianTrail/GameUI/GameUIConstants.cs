@@ -16,10 +16,10 @@
 
         public const string ConsoleTitle = "The Appalachian Trail";
         public const string ShopItems = "1. Water Bottle \t$25 \n" +
-                                        "2. Sets Of Clothing \t$10 \n" +
-                                        "3. Tent \t \t$200 \n" +
-                                        "4. Ounces of Food \t$1 \n" +
-                                        "5. Sleeping Bag \t$100 \n";
+                                        "\t2. Sets Of Clothing \t$10 \n" +
+                                        "\t3. Tent \t \t$200 \n" +
+                                        "\t4. Ounces of Food \t$1 \n" +
+                                        "\t5. Sleeping Bag \t$100 \n";
 
     }
 }

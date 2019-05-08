@@ -24,6 +24,10 @@ namespace GameLogic.Entities
             {
                 GetShoppingItem();
             }
+            foreach (var item in ShoppingCart)
+            {
+                m_Hiker.Backpack.AddItemToBackpack(item.Key, item.Value);
+            }
         }
 
         public void GetShoppingItem()

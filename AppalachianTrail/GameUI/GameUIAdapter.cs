@@ -33,13 +33,13 @@ namespace GameUI
 
         public string GetName()
         {
-            DisplayToUser("What's your name? ");
+            AskUserChoice("What's your name? ");
             return Console.ReadLine();
         }
 
         public Occupation GetOccupation()
         {
-            DisplayToUser("What's your occupation? [Doctor, Carpenter, Student, Hippie] ");
+            AskUserChoice("What's your occupation? [Doctor, Carpenter, Student, Hippie]: ");
             string occupation = Console.ReadLine();
             bool isValidOccupation = Enum.IsDefined(typeof(Occupation), occupation);
             if(isValidOccupation)
@@ -62,7 +62,7 @@ namespace GameUI
 
         public Month GetStartDate()
         {
-            DisplayToUser("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
+            AskUserChoice("When would you like to begin your trek on the AT? \n\t\t(Please specify full month or # of month ex. March or 3): ");
             string startDate = Console.ReadLine();
             bool isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
             int numValueOfStartDate = 0;
@@ -74,7 +74,7 @@ namespace GameUI
             while (!isValidStartDate)
             {
                 DisplayToUser(startDate + " is not a valid response, please try again...");
-                DisplayToUser("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
+                AskUserChoice("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
                 startDate = Console.ReadLine();
                 isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
                 if (isValidStartDate)
@@ -85,17 +85,33 @@ namespace GameUI
             return Month.Unknown;
         }
 
-        public void DisplayTrailSegmentProgression(DateTime currentDate, Weather currentWeather, HealthStatus currentHealthStatus, int amountOfFood, int distanceToNextLocation, int totalDistanceTraveled)
+        public int DisplayTrailSegmentProgression(DateTime currentDate, Weather currentWeather, HealthStatus currentHealthStatus, int amountOfFood, int distanceToNextLocation, int totalDistanceTraveled)
         {
             ClearUserView();
-            DisplayToUser("Date: " + currentDate.ToLongDateString());
-            DisplayToUser("Weather: " + currentWeather.ToString());
-            DisplayToUser("Health: " + currentHealthStatus.ToString());
-            DisplayToUser("Food: " + amountOfFood.ToString());
-            DisplayToUser("Next landmark: " + distanceToNextLocation.ToString());
-            DisplayToUser("Miles traveled: " + totalDistanceTraveled.ToString());
-            DisplayToUser("Continue?");
-            Console.ReadLine();
+            DisplayToUser("\n\tDate: " + currentDate.ToLongDateString());
+            DisplayToUser("\tWeather: " + currentWeather.ToString());
+            DisplayToUser("\tHealth: " + currentHealthStatus.ToString());
+            DisplayToUser("\tFood: " + amountOfFood.ToString());
+            DisplayToUser("\tNext landmark: " + distanceToNextLocation.ToString());
+            DisplayToUser("\tMiles traveled: " + totalDistanceTraveled.ToString());
+            int userAnswer;
+            bool isValidAnswer = DisplayTravelOptions(out userAnswer);
+            while (!isValidAnswer)
+            {
+                isValidAnswer = DisplayTravelOptions(out userAnswer);
+            }
+            return userAnswer;
+        }
+
+
+        private bool DisplayTravelOptions(out int numValueOfUserAnswer)
+        {
+            DisplayToUser("Enter 1 to continue on the trail");
+            DisplayToUser("nter 2 to rest");
+            AskUserChoice("Your choice: ");
+            string userAnswer = Console.ReadLine();
+            bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
+            return isValidAnswer;
         }
 
         public void DisplayLocationMenu(string newLocationName)
@@ -116,6 +132,7 @@ namespace GameUI
             DisplayToUser("Enter 1 to purchase some supplies");
             DisplayToUser("Enter 2 to rest");
             DisplayToUser("Enter 3 to speak with the townsfolk");
+            AskUserChoice("Your choice: ");
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
             return isValidAnswer;
@@ -129,7 +146,12 @@ namespace GameUI
 
         private void DisplayToUser(string message)
         {
-            Console.WriteLine(message);
+            Console.WriteLine("\t" + message);
+        }
+
+        private void AskUserChoice(string message)
+        {
+            Console.Write("\n\t\t" + message);
         }
 
         private void ClearUserView()
@@ -149,7 +171,7 @@ namespace GameUI
             DisplayToUser("We have the following items in stock.");
             DisplayToUser(GameUIConstants.ShopItems);
             DisplayToUser("You currently have " + wallet + " to spend.");
-            DisplayToUser("Would you like to purchase anything? (Y/N)");
+            AskUserChoice("Would you like to purchase anything? (Y/N): ");
             var purchaseResponse = Console.ReadLine().ToLower();
             if(purchaseResponse == "y")
             {
@@ -163,7 +185,7 @@ namespace GameUI
 
         public BackpackItem PurchaseShoppingItem(out int itemPurchaseCount)
         {
-            DisplayToUser("Select an item to purchase");
+            AskUserChoice("Select an item to purchase [1-5]: ");
             string purchasedItemString = Console.ReadLine();
             BackpackItem purchasedItem;
             switch(purchasedItemString)
@@ -187,7 +209,7 @@ namespace GameUI
                     purchasedItem = BackpackItem.None;
                     break;
             }
-            DisplayToUser("How many would you like to purchase?");
+            AskUserChoice("How many would you like to purchase?: ");
             string purchaseAmountString = Console.ReadLine();
             Int32.TryParse(purchaseAmountString, out itemPurchaseCount);
             return purchasedItem;
