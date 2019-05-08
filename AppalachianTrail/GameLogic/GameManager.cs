@@ -16,6 +16,8 @@ namespace GameLogic
 
         private Hiker m_Hiker;
 
+        private SetupShopping m_SetupShopping;
+
         public void Initialize()
         {
             InitializeGameUIAdapter();
@@ -33,8 +35,8 @@ namespace GameLogic
 
         public void SetupShopping()
         {
-            SetupShopping setupShopping = new SetupShopping(m_GameUIAdapter, m_Hiker);
-            setupShopping.Initialize();
+            m_SetupShopping = new SetupShopping(m_GameUIAdapter, m_Hiker);
+            m_SetupShopping.StartShopping();
         }
 
         public void StartGameLoop()
@@ -110,7 +112,7 @@ namespace GameLogic
 
             if(userResponse == 1)
             {
-                //shop
+                m_SetupShopping.StartShopping();
             }
             if(userResponse == 2)
             {

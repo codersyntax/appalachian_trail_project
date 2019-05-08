@@ -18,7 +18,11 @@ namespace GameLogic.Entities
             m_Hiker = hiker;
         }
 
-        public void Initialize()
+        //TODO: ADD CONCEPT OF SHOWING THE CURRENT SHOPPING CART
+
+        //TODO: ADD CONCEPT OF SHOWING THE HIKERS CURRENT BACKPACK ITEMS
+
+        public void StartShopping()
         {
             while(m_GameUIAdapter.StartShopping(m_Hiker.Wallet))
             {
