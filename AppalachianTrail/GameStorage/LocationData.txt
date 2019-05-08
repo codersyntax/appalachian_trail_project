@@ -1,10 +1,10 @@
-﻿Dahlonega, Ga/cold/cold/mild/warm/hot/hot/hot/hot/warm/mild/mild/chilly 
-Franklin, NC/cold/cold/chilly/mild/mild/warm/hot/hot/mild/cold/cold/cold  
-Unicoi County, TN/cold/cold/chilly/mild/warm/warm/hot/hot/mild/cold/cold/cold
-Damascus, VA/cold/cold/chilly/mild/mild/warm/warm/warm/mild/cold/cold/cold
-Round Hill, VA/cold/cold/chilly/mild/mild/warm/warm/warm/mild/cold/cold/cold
-Bolivar,WV/cold/cold/chilly/chilly/chilly/warm/hot/warm/mild/cold/cold/cold
-Duncannon, PA/cold/cold/chilly/mild/mild/mild/hot/hot/mild/cold/cold/cold
-Warren County, NJ/cold/cold/chilly/mild/mild/warm/hot/hot/mild/cold/cold/cold
-Warwick, NY/cold/cold/chilly/mild/mild/mild/hot/warm/mild/cold/cold/cold
-Rangeley, ME/cold/cold/chilly/chilly/chilly/warm/hot/mild/chilly/cold/cold/cold
+﻿Dahlonega, GA/Cold/Cold/Mild/Warm/Hot/Hot/Hot/Hot/Warm/Mild/Mild/Chilly 
+Franklin, NC/Cold/Cold/Chilly/Mild/Mild/Warm/Hot/Hot/Mild/Cold/Cold/Cold  
+Unicoi County, TN/Cold/Cold/Chilly/Mild/Warm/Warm/Hot/Hot/Mild/Cold/Cold/Cold
+Damascus, VA/Cold/Cold/Chilly/Mild/Mild/Warm/Warm/Warm/Mild/Cold/Cold/Cold
+Round Hill, VA/Cold/Cold/Chilly/Mild/Mild/Warm/Warm/Warm/Mild/Cold/Cold/Cold
+Bolivar, WV/Cold/Cold/Chilly/Chilly/Chilly/Warm/Hot/Warm/Mild/Cold/Cold/Cold
+Duncannon, PA/Cold/Cold/Chilly/Mild/Mild/Mild/Hot/Hot/Mild/Cold/Cold/Cold
+Warren County, NJ/Cold/Cold/Chilly/Mild/Mild/Warm/Hot/Hot/Mild/Cold/Cold/Cold
+Warwick, NY/Cold/Cold/Chilly/Mild/Mild/Mild/Hot/Warm/Mild/Cold/Cold/Cold
+Rangeley, ME/Cold/Cold/Chilly/Chilly/Chilly/Warm/Hot/Mild/Chilly/Cold/Cold/Cold

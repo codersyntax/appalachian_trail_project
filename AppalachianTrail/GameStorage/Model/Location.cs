@@ -1,6 +1,6 @@
 ﻿using GameStorage.GameValues;
 
-namespace GameLogic.Entities
+namespace GameStorage.Model
 {
     public class Location
     {

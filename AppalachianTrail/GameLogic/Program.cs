@@ -4,11 +4,10 @@
     {
         static void Main(string[] args)
         {
-            GameController gameController = new GameController();
-            //gameController.Initialize();
-            gameController.StartSetup();
-            gameController.StartShopping();
-            gameController.StartGameLoop();
+            GameManager gameManager = new GameManager();
+            gameManager.Initialize();
+            gameManager.StartSetup();
+            gameManager.StartGameLoop();
         }
     }
 }

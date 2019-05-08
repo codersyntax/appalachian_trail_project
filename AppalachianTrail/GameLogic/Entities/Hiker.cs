@@ -1,4 +1,5 @@
 ﻿using GameStorage.GameValues;
+using GameStorage.Model;
 using System;
 
 namespace GameLogic.Entities

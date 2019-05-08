@@ -1,12 +1,16 @@
 ﻿using GameLogic.Entities;
+using GameStorage;
 using GameStorage.GameValues;
+using GameStorage.Model;
 using GameUI;
 
 namespace GameLogic
 {
-    public class GameController
+    public class GameManager
     {
-        private GameUIAdapter m_GameUIAdapter = new GameUIAdapter();
+        private GameUIAdapter m_GameUIAdapter;
+
+        private GameDataAdapter m_GameDataAdapter;
 
         private Trail m_Trail;
 
@@ -15,6 +19,7 @@ namespace GameLogic
         public void Initialize()
         {
             InitializeGameUIAdapter();
+            InitializeGameStorageAdapter();
         }
 
         public void StartSetup()
@@ -32,11 +37,6 @@ namespace GameLogic
             setupShopping.Initialize();
         }
 
-        public void StartShopping()
-        {
-            m_Hiker.Backpack.AddItemToBackpack(BackpackItem.OuncesOfFood, 1000);
-        }
-
         public void StartGameLoop()
         {
             Location newLocation = m_Trail.GetNextLocation(m_Hiker.CurrentLocation);
@@ -49,7 +49,7 @@ namespace GameLogic
                 {
                     UpdateGameUIToShowTravel();
 
-                    var distanceCoveredInDay = (int)m_Hiker.CurrentPace * 7;
+                    var distanceCoveredInDay = (int)m_Hiker.CurrentPace * 4;
 
                     m_Hiker.DistanceToNextLocation -= distanceCoveredInDay;
 
@@ -75,12 +75,19 @@ namespace GameLogic
 
         private void InitializeGameUIAdapter()
         {
+            m_GameUIAdapter = new GameUIAdapter();
             m_GameUIAdapter.Initialize();
+        }
+
+        private void InitializeGameStorageAdapter()
+        {
+            m_GameDataAdapter = new GameDataAdapter();
         }
 
         private void SetupTrail()
         {
             m_Trail = new Trail();
+            m_Trail.Map = m_GameDataAdapter.GetMap();
         }
 
         private void SetupHiker()

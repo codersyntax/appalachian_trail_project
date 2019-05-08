@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameDataAdapter.cs" />
     <Compile Include="GameValues\BackpackItem.cs" />
     <Compile Include="GameValues\HealthStatus.cs" />
     <Compile Include="GameValues\Month.cs" />
@@ -47,11 +48,17 @@
     <Compile Include="GameValues\Pace.cs" />
     <Compile Include="GameValues\Ration.cs" />
     <Compile Include="GameValues\Weather.cs" />
+    <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\TrailSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LocationData.txt" />
-    <Content Include="TrailSegmentData.txt" />
+    <Content Include="LocationData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TrailSegmentData.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

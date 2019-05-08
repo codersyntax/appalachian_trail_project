@@ -1,9 +1,9 @@
-﻿Dahlonega, Ga/Franklin, NC/56  
+﻿Dahlonega, GA/Franklin, NC/56  
 Franklin, NC/Unicoi County, TN/ 86
 Unicoi County, TN/Damascus, VA/52
 Damascus, VA/Round Hill, VA/279
-Round Hill, VA/Bolivar,WV/14
-Bolivar,WV/Duncannon, PA/13
+Round Hill, VA/Bolivar, WV/14
+Bolivar, WV/Duncannon, PA/13
 Duncannon, PA/Warren County, NJ/83
 Warren County, NJ/Warwick, NY/116
-Warwick, NY/Rangeley, ME/405.3
+Warwick, NY/Rangeley, ME/405
