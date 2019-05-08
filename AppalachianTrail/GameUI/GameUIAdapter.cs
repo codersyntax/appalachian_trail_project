@@ -19,7 +19,7 @@ namespace GameUI
 
         private void Intro()
         {
-            DisplayToUser("Hello traveler");
+            DisplayToUser("\nHello traveler");
             Delay();
             DisplayToUser("And welcome to...");
             Delay();
@@ -107,24 +107,24 @@ namespace GameUI
         private bool DisplayTravelOptions(out int numValueOfUserAnswer)
         {
             DisplayToUser("Enter 1 to continue on the trail");
-            DisplayToUser("nter 2 to rest");
+            DisplayToUser("Enter 2 to rest");
             AskUserChoice("Your choice: ");
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
             return isValidAnswer;
         }
 
-        public void DisplayLocationMenu(string newLocationName)
+        public int DisplayLocationMenu(string newLocationName)
         {
             ClearUserView();
-            DisplayToUser("You have arrived at: " + newLocationName);
+            DisplayToUser("\nYou have arrived at: " + newLocationName);
             int userAnswer;
             bool isValidAnswer = DisplayLocationOptions(out userAnswer);
             while (!isValidAnswer)
             {
                 isValidAnswer = DisplayLocationOptions(out userAnswer);
             }
-            Console.ReadLine();
+            return userAnswer;
         }
 
         private bool DisplayLocationOptions(out int numValueOfUserAnswer)
@@ -132,6 +132,7 @@ namespace GameUI
             DisplayToUser("Enter 1 to purchase some supplies");
             DisplayToUser("Enter 2 to rest");
             DisplayToUser("Enter 3 to speak with the townsfolk");
+            DisplayToUser("Enter 4 to continue to the next trailhead");
             AskUserChoice("Your choice: ");
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);

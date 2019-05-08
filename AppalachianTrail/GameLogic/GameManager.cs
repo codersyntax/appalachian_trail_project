@@ -47,13 +47,13 @@ namespace GameLogic
 
                 while (m_Hiker.DistanceToNextLocation > 0)
                 {
-                    int userResponse = UpdateGameUIToShowTravel();
+                    int userTravelResponse = UpdateGameUIToShowTravel();
 
-                    if (userResponse == 1)
+                    if (userTravelResponse == 1)
                     {
                         ApplyGameLoopContinueDeductions();
                     }
-                    if(userResponse == 2)
+                    if(userTravelResponse == 2)
                     {
                         ApplyGameLoopRestDeductions();
                     }
@@ -63,7 +63,12 @@ namespace GameLogic
 
                 m_Hiker.DistanceToNextLocation = 0;
 
-                UpdateGameUIToArriveAtLocation(newLocation);
+                int userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
+                
+                while(userLocationResponse != 4)
+                {
+                    userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
+                }
 
                 newLocation = m_Trail.GetNextLocation(m_Hiker.CurrentLocation);
 
@@ -99,9 +104,24 @@ namespace GameLogic
             return m_GameUIAdapter.DisplayTrailSegmentProgression(m_Hiker.CurrentDate, m_Hiker.CurrentLocation.AverageWeatherForEachMonth[m_Hiker.CurrentDate.Month], m_Hiker.CurrentHealthStatus, m_Hiker.Backpack.GetCountOfItems(BackpackItem.OuncesOfFood), m_Hiker.DistanceToNextLocation, m_Hiker.TotalMilesTraveled);
         }
 
-        private void UpdateGameUIToArriveAtLocation(Location newLocation)
+        private int UpdateGameUIToArriveAtLocation(Location newLocation)
         {
-            m_GameUIAdapter.DisplayLocationMenu(newLocation.Name);
+            int userResponse = m_GameUIAdapter.DisplayLocationMenu(newLocation.Name);
+
+            if(userResponse == 1)
+            {
+                //shop
+            }
+            if(userResponse == 2)
+            {
+                m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
+            }
+            if(userResponse == 3)
+            {
+                m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(2);
+                //talk to towns people
+            }
+            return userResponse;
         }
 
         private void ApplyGameLoopContinueDeductions()
@@ -120,6 +140,8 @@ namespace GameLogic
         private void ApplyGameLoopRestDeductions()
         {
             m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, 5);
+
+            m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
         }
     }
 }
