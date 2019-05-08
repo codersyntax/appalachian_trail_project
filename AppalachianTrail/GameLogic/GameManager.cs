@@ -75,9 +75,20 @@ namespace GameLogic
                             userTravelResponse = UpdateGameUIToShowTravel();
                         }
                     }
+
                     if (userTravelResponse == (int)TravelResponse.Continue)
                     {
                         ApplyGameLoopContinueDeductions();
+                    }
+
+                    if (m_Hiker.CurrentHealthStatus == HealthStatus.Dead)
+                    {
+                        int endGameUserResponse = m_GameUIAdapter.DisplayGameLoss(DetermineReasonForDeath());
+                        if(endGameUserResponse == 2)
+                        {
+                            System.Environment.Exit(0);
+                        }
+                        // TODO: handle high score or game exiting depending upon response
                     }
                 }
 
@@ -86,17 +97,21 @@ namespace GameLogic
                 m_Hiker.DistanceToNextLocation = 0;
 
                 userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
-                
-                while(userLocationResponse != (int)LocationResponse.Continue)
+
+                while (userLocationResponse != (int)LocationResponse.Continue)
                 {
                     userLocationResponse = UpdateGameUIToArriveAtLocation(newLocation);
                 }
 
                 newLocation = m_Trail.GetNextLocation(m_Hiker.CurrentLocation);
-
             }
 
-            m_GameUIAdapter.DisplayGameWin();
+            int gameWinUserResponse = m_GameUIAdapter.DisplayGameWin();
+            // TODO:if userResponse is 1, save game and display high scores
+            if (gameWinUserResponse == 2)
+            {
+                System.Environment.Exit(0);
+            }
         }
 
         private void InitializeGameUIAdapter()
@@ -156,6 +171,14 @@ namespace GameLogic
             m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
 
             m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
+
+            CalculateHikerHealthBasedOnPace();
+
+            CalculateHikerHealthBasedOnFoodRation();
+
+            CalculateHikerHealthBasedOnWeatherAndGear();
+
+            m_Hiker.CurrentHealthStatus = DetermineHealthStatus();
         }
 
         private void ApplyGameLoopRestDeductions()
@@ -163,6 +186,10 @@ namespace GameLogic
             m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
 
             m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
+
+            m_Hiker.HealthMeter += 3;
+
+            CalculateHikerHealthBasedOnFoodRation();
         }
 
         private void DeterminePaceChange()
@@ -183,6 +210,98 @@ namespace GameLogic
                 ration = m_GameUIAdapter.GetRationChange(m_Hiker.CurrentFoodRation);
             }
             m_Hiker.CurrentFoodRation = ration;
+        }
+
+        private void CalculateHikerHealthBasedOnFoodRation()
+        {
+            switch(m_Hiker.CurrentFoodRation)
+            {
+                case Ration.Filling:
+                    if (m_Hiker.HealthMeter != 100)
+                    {
+                        m_Hiker.HealthMeter += 1;
+                    }
+                    break;
+                case Ration.Meager:
+                    m_Hiker.HealthMeter -= 1;
+                    break;
+                case Ration.BareBones:
+                    m_Hiker.HealthMeter -= 5;
+                    break;
+            }
+        }
+
+        private void CalculateHikerHealthBasedOnPace()
+        {
+            switch (m_Hiker.CurrentPace)
+            {
+                case Pace.Strenuous:
+                    m_Hiker.HealthMeter -= 3;
+                    break;
+                case Pace.Steady:
+                    m_Hiker.HealthMeter -= 1;
+                    break;
+                case Pace.Slow:
+                    if (m_Hiker.HealthMeter != 100)
+                    {
+                        m_Hiker.HealthMeter += 1;
+                    }
+                    break;
+            }
+        }
+
+        private HealthStatus DetermineHealthStatus()
+        {
+            if (m_Hiker.HealthMeter > 80)
+            {
+                return HealthStatus.Good;
+            }
+            else if (m_Hiker.HealthMeter > 60)
+            {
+                return HealthStatus.Fair;
+            }
+            else if (m_Hiker.HealthMeter > 40)
+            {
+                return HealthStatus.Weak;
+            }
+            else if(m_Hiker.HealthMeter > 20)
+            {
+                return HealthStatus.Sick;
+            }
+            else
+            {
+                return HealthStatus.Dead;
+            }
+        }
+
+        private void CalculateHikerHealthBasedOnWeatherAndGear()
+        {
+            Weather LocationWeather = m_Hiker.CurrentLocation.AverageWeatherForEachMonth[m_Hiker.CurrentDate.Month];
+            bool hasSleepingBag = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.SleepingBag);
+            if (LocationWeather == Weather.Cold && !hasSleepingBag)
+            {
+                m_Hiker.HealthMeter = 0;
+            }
+            else if(LocationWeather == Weather.Chilly && !hasSleepingBag)
+            {
+                m_Hiker.HealthMeter -= 20;
+            }
+        }
+
+        private string DetermineReasonForDeath()
+        {
+            bool hasSleepingBag = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.SleepingBag);
+            bool hasFood = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.OuncesOfFood);
+
+            if(hasFood && !hasSleepingBag)
+            {
+                return "You froze to death without a sleeping bag near " + m_Hiker.CurrentLocation.Name;
+            }
+            if(!hasFood)
+            {
+                return "You starved to death near " + m_Hiker.CurrentLocation.Name;
+            }
+            return "Unknown death situation";
         }
     }
 }

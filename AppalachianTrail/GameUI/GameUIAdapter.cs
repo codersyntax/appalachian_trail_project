@@ -142,10 +142,38 @@ namespace GameUI
             return isValidAnswer;
         }
 
-        public void DisplayGameWin()
+        public int DisplayGameWin()
         {
             DisplayToUser("Congrats traveller! You made it to Rangeley, ME! Would you like to record your high score? ");
-            Console.ReadLine();
+            int userAnswer;
+            bool isValidAnswer = DisplayHighScoreOptions(out userAnswer);
+            while (!isValidAnswer)
+            {
+                isValidAnswer = DisplayHighScoreOptions(out userAnswer);
+            }
+            return userAnswer;
+        }
+
+        public int DisplayGameLoss(string reasonOfDeath)
+        {
+            DisplayToUser(reasonOfDeath + " Would you like to record your high score? ");
+            int userAnswer;
+            bool isValidAnswer = DisplayHighScoreOptions(out userAnswer);
+            while (!isValidAnswer)
+            {
+                isValidAnswer = DisplayHighScoreOptions(out userAnswer);
+            }
+            return userAnswer;
+        }
+
+        private bool DisplayHighScoreOptions(out int numValueOfUserAnswer)
+        {
+            DisplayToUser("Enter 1 to record your high score");
+            DisplayToUser("Enter 2 to quit");
+            AskUserChoice("Your choice: ");
+            string userAnswer = Console.ReadLine();
+            bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
+            return isValidAnswer;
         }
 
         private void DisplayToUser(string message)
