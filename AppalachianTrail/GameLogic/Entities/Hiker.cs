@@ -30,8 +30,6 @@ namespace GameLogic.Entities
 
         internal int TotalMilesTraveled { get; set; }
 
-        internal string ReasonForDeath { get; set; }
-
         internal Hiker(string name, Occupation occupation, Month startDate, Location startLocation)
         {
             Name = name;
