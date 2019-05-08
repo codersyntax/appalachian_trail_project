@@ -18,10 +18,13 @@ namespace GameLogic
 
         private Shopping m_Shopping;
 
+        private System.Random m_RandomEventChance;
+
         public void Initialize()
         {
             InitializeGameUIAdapter();
             InitializeGameStorageAdapter();
+            InitializeRandomEventChance();
         }
 
         public void StartSetup()
@@ -123,6 +126,11 @@ namespace GameLogic
         private void InitializeGameStorageAdapter()
         {
             m_GameDataAdapter = new GameDataAdapter();
+        }
+
+        private void InitializeRandomEventChance()
+        {
+            m_RandomEventChance = new System.Random();
         }
 
         private void SetupTrail()
