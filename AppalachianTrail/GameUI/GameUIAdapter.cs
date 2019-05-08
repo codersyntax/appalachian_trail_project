@@ -1,5 +1,6 @@
 ﻿using GameStorage.GameValues;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace GameUI
@@ -165,13 +166,15 @@ namespace GameUI
             Thread.Sleep(time);
         }
 
-        public bool StartShopping (int wallet)
+        public bool StartShopping (int wallet, Dictionary<BackpackItem, int> hikerBackpack, Dictionary<BackpackItem, int> shoppingCart)
         {
             ClearUserView();
             DisplayToUser("Welcome to the supply store. What would you like to purchase?");
             DisplayToUser("We have the following items in stock.");
             DisplayToUser(GameUIConstants.ShopItems);
             DisplayToUser("You currently have " + wallet + " to spend.");
+            DisplayCurrentShoppingCart(shoppingCart);
+            DisplayHikerBackpack(hikerBackpack);
             AskUserChoice("Would you like to purchase anything? (Y/N): ");
             var purchaseResponse = Console.ReadLine().ToLower();
             if(purchaseResponse == "y")
@@ -182,6 +185,26 @@ namespace GameUI
             {
                 return false;
             }
+        }
+
+        private void DisplayCurrentShoppingCart(Dictionary<BackpackItem, int> shoppingCart)
+        {
+            DisplayToUser("\n\tYour current shopping cart items");
+            foreach (var item in shoppingCart)
+            {
+                DisplayToUser("\t" + item.Key.ToString() + " : " + item.Value.ToString());
+            }
+            DisplayToUser("\n");
+        }
+
+        private void DisplayHikerBackpack(Dictionary<BackpackItem, int> hikerBackpack)
+        {
+            DisplayToUser("\n\tYour current back pack items");
+            foreach (var item in hikerBackpack)
+            {
+                DisplayToUser("\t" + item.Key.ToString() + " : " + item.Value.ToString());
+            }
+            DisplayToUser("\n");
         }
 
         public BackpackItem PurchaseShoppingItem(out int itemPurchaseCount)
