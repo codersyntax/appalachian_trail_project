@@ -47,7 +47,29 @@ namespace GameStorage
             return File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "LocationData.txt"));
         }
 
-        private void ConvertTrailSegmentDataToTrailSegments(string[] trailSegmentDataArray)
+        private void WriteHighScore(string hikername, int highscore)
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, "HighScoreData.txt");
+            // This text is added only once to the file.
+            if (!File.Exists(path))
+            {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.WriteLine(hikername + "/" + highscore.ToString());
+                    
+                }
+            }
+
+
+        }
+        private string[] ReadHighScoreDataFile()
+        {
+            return File.ReadAllLines(Path.Combine(Environment.CurrentDirectory, "HighScoreData.txt"));
+
+        }
+
+            private void ConvertTrailSegmentDataToTrailSegments(string[] trailSegmentDataArray)
         {
             foreach (string trailSegmentDataInfo in trailSegmentDataArray)
             {
