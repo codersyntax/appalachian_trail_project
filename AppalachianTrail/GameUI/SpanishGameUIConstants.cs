@@ -64,6 +64,10 @@
         public override string FoodRationQuestion => "¿Cuántas raciones de alimentos te gustaría consumir??";
         public override string FoodRationOption => "[1] Relleno / [2] pobre / [3] puro huesos";
         public override string CurrentFoodRation => "Tus raciones alimenticias actuales.: ";
+        public override string RunIntoBear => "Te topas con un oso en medio de la pista...\n\t¿Te desvías y pierdes un día de progreso?? [0]\n\tO peleas contra el oso?... [1]";
+        public override string FoughtOffBear => "¡Usted se defendió con éxito del oso! Leonardo DiCaprio estaría orgulloso.\n\tPresiona cualquier tecla para continuar...";
+        public override string HighScoresTitle => "El sendero de los Apalaches de todos los tiempos Puntuaciones más altas";
+        public override string FellOffLedge => "Se resbaló mientras atravesaba una cornisa y se cayó, lastimándose el tobillo y perdiendo un saco de dormir..\n\tPresiona cualquier tecla para continuar...";
 
 
     }

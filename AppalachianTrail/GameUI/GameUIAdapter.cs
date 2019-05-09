@@ -11,7 +11,7 @@ namespace GameUI
         private GameUIConstants m_GameUIConstants;
         public void Initialize()
         {
-            m_GameUIConstants = new EnglishGameUIConstants();
+            m_GameUIConstants = new SpanishGameUIConstants();
             SetGameTitle();
             Intro();
         }
