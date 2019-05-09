@@ -64,5 +64,9 @@
         public override string FoodRationQuestion => "How much food rations would you like to consume?";
         public override string FoodRationOption => "[1] Filling / [2] Meager / [3] Bare bones";
         public override string CurrentFoodRation => "Your current food rations: ";
+        public override string RunIntoBear => "You run into a bear in the middle of the trail...\n\tDo you take a detour and lose a day of progress? [0]\n\tOr do you fight the bear?... [1]";
+        public override string FoughtOffBear => "You successfully fended off the bear! Leonardo DiCaprio would be proud.\n\tPress any key to contine...";
+        public override string HighScoresTitle => "The Appalachian Trail All Time High Scores";
+        public override string FellOffLedge => "You slipped while traversing a ledge and fell injuring your ankle and losing a sleeping bag.\n\tPress any key to continue...";
     }
 }

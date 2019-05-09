@@ -110,7 +110,7 @@ namespace GameUI
         public int GetResponseOnWhetherToFightBear()
         {
             ClearUserView();
-            DisplayToUser("You run into a bear in the middle of the trail...\n\tDo you take a detour and lose a day of progress? [0]\n\tOr do you fight the bear?... [1]");
+            DisplayToUser(m_GameUIConstants.RunIntoBear);
             int userAnswer;
             bool isValidAnswer = DisplayApproachingBearNotification(out userAnswer);
             while (!isValidAnswer)
@@ -130,7 +130,7 @@ namespace GameUI
 
         public void DisplayBearFightResolution()
         {
-            DisplayToUser("You successfully fended off the bear! Leonardo DiCaprio would be proud.\n\tPress any key to contine...");
+            DisplayToUser(m_GameUIConstants.FoughtOffBear);
             Console.ReadLine();
         }
 
@@ -216,7 +216,7 @@ namespace GameUI
             }
             var sortedHighScores = HighScores.OrderBy(x => x.Value);
             ClearUserView();
-            DisplayToUser("The Appalachian Trail All Time High Scores");
+            DisplayToUser(m_GameUIConstants.HighScoresTitle);
             foreach (var score in sortedHighScores)
             {
                 DisplayToUser("\n\t\tHiker: " + score.Key + "\n\t\tScore: " + score.Value + "\n");
@@ -378,7 +378,7 @@ namespace GameUI
 
         public void FallOffLedge()
         {
-            DisplayToUser("You slipped while traversing a ledge and fell injuring your ankle and losing a sleeping bag.\n\tPress any key to continue...");
+            DisplayToUser(m_GameUIConstants.FellOffLedge);
             Console.ReadLine();
         }
     }

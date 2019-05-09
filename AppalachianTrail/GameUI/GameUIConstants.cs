@@ -231,5 +231,25 @@
         {
             get { return string.Empty; }
         }
+
+        public virtual string RunIntoBear
+        {
+            get { return string.Empty; }
+        }
+
+        public virtual string FoughtOffBear
+        {
+            get { return string.Empty; }
+        }
+
+        public virtual string HighScoresTitle
+        {
+            get { return string.Empty; }
+        }
+
+        public virtual string FellOffLedge
+        {
+            get { return string.Empty; }
+        }
     }
 }
