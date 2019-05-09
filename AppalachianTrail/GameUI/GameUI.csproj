@@ -49,6 +49,7 @@
     <Compile Include="EnglishGameUIConstants.cs" />
     <Compile Include="GameUIAdapter.cs" />
     <Compile Include="GameUIConstants.cs" />
+    <Compile Include="IGameUIAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpanishGameUIConstants.cs" />
   </ItemGroup>

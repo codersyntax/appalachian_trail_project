@@ -6,12 +6,12 @@ using System.Threading;
 
 namespace GameUI
 {
-    public class GameUIAdapter
+    public class GameUIAdapter : IGameUIAdapter
     {
         private GameUIConstants m_GameUIConstants;
         public void Initialize()
         {
-            m_GameUIConstants = new SpanishGameUIConstants();
+            m_GameUIConstants = new EnglishGameUIConstants();
             SetGameTitle();
             Intro();
         }

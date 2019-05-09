@@ -8,7 +8,7 @@ namespace GameLogic
 {
     public class GameManager
     {
-        private GameUIAdapter m_GameUIAdapter;
+        private IGameUIAdapter m_GameUIAdapter;
 
         private GameDataAdapter m_GameDataAdapter;
 
@@ -38,7 +38,7 @@ namespace GameLogic
 
         public void SetupShopping()
         {
-            m_Shopping = new Shopping(m_GameUIAdapter, m_Hiker);
+            m_Shopping = new Shopping((GameUIAdapter)m_GameUIAdapter, m_Hiker);
             m_Shopping.StartShopping();
         }
 
@@ -393,7 +393,16 @@ namespace GameLogic
                         }
                         else
                         {
-                            m_GameUIAdapter.DisplayGameLoss("You were mauled by a bear. Leonardo Di Caprio would be proud.");
+                            int endGameUserResponse = m_GameUIAdapter.DisplayGameLoss("You were mauled by a bear. Leonardo Di Caprio would be proud.");
+                            if (endGameUserResponse == 1)
+                            {
+                                m_GameDataAdapter.WriteHighScore(m_Hiker.Name, m_Hiker.GameScore);
+                                m_GameUIAdapter.DisplayHighScoreMenu(m_GameDataAdapter.ReadHighScoreDataFile());
+                            }
+                            if (endGameUserResponse == 2)
+                            {
+                                System.Environment.Exit(0);
+                            }
                         }
                     }
                     break;
