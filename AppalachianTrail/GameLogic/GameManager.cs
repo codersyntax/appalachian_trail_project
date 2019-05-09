@@ -386,7 +386,7 @@ namespace GameLogic
                     }
                     if(userResponse == 1)
                     {
-                        int bearFightSuccess = m_RandomEventChance.Next(0, 1);
+                        int bearFightSuccess = m_RandomEventChance.Next(0, 2);
                         if(bearFightSuccess == 1)
                         {
                             m_GameUIAdapter.DisplayBearFightResolution();
