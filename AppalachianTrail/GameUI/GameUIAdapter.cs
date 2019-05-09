@@ -1,6 +1,7 @@
 ﻿using GameStorage.GameValues;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace GameUI
@@ -174,6 +175,25 @@ namespace GameUI
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
             return isValidAnswer;
+        }
+
+        public void DisplayHighScoreMenu(string[] highScores)
+        {
+            List<KeyValuePair<string, int>> HighScores = new List<KeyValuePair<string, int>>();
+            foreach(string score in highScores)
+            {
+                string[] scoreArray = score.Split('/');
+                HighScores.Add(new KeyValuePair<string, int>(scoreArray[0], Int32.Parse(scoreArray[1])));
+            }
+            var sortedHighScores = HighScores.OrderBy(x => x.Value);
+            ClearUserView();
+            DisplayToUser("The Appalachian Trail All Time High Scores");
+            foreach(var score in sortedHighScores)
+            {
+                DisplayToUser("\n\t\tHiker: " + score.Key + "\n\t\tScore: " + score.Value + "\n");
+            }
+            Console.ReadLine();
+            Environment.Exit(0);
         }
 
         private void DisplayToUser(string message)

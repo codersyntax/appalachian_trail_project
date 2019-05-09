@@ -30,6 +30,8 @@ namespace GameLogic.Entities
 
         internal int TotalMilesTraveled { get; set; }
 
+        internal int GameScore { get; set; }
+
         internal Hiker(string name, Occupation occupation, Month startDate, Location startLocation)
         {
             Name = name;
@@ -53,6 +55,8 @@ namespace GameLogic.Entities
             Backpack = new Backpack();
 
             TotalMilesTraveled = 0;
+
+            GameScore = 0;
         }
     }
 }

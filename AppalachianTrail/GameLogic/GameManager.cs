@@ -87,11 +87,15 @@ namespace GameLogic
                     if (m_Hiker.CurrentHealthStatus == HealthStatus.Dead)
                     {
                         int endGameUserResponse = m_GameUIAdapter.DisplayGameLoss(DetermineReasonForDeath());
+                        if(endGameUserResponse == 1)
+                        {
+                            m_GameDataAdapter.WriteHighScore(m_Hiker.Name, m_Hiker.GameScore);
+                            m_GameUIAdapter.DisplayHighScoreMenu(m_GameDataAdapter.ReadHighScoreDataFile());
+                        }
                         if(endGameUserResponse == 2)
                         {
                             System.Environment.Exit(0);
                         }
-                        // TODO: handle high score or game exiting depending upon response
                     }
                 }
 
@@ -110,7 +114,11 @@ namespace GameLogic
             }
 
             int gameWinUserResponse = m_GameUIAdapter.DisplayGameWin();
-            // TODO:if userResponse is 1, save game and display high scores
+            if(gameWinUserResponse == 1)
+            {
+                m_GameDataAdapter.WriteHighScore(m_Hiker.Name, 0);
+                m_GameUIAdapter.DisplayHighScoreMenu(m_GameDataAdapter.ReadHighScoreDataFile());
+            }
             if (gameWinUserResponse == 2)
             {
                 System.Environment.Exit(0);
@@ -187,6 +195,8 @@ namespace GameLogic
             CalculateHikerHealthBasedOnWeatherAndGear();
 
             m_Hiker.CurrentHealthStatus = DetermineHealthStatus();
+
+            CalculateHikerGameScore();
         }
 
         private void ApplyGameLoopRestDeductions()
@@ -310,6 +320,26 @@ namespace GameLogic
                 return "You starved to death near " + m_Hiker.CurrentLocation.Name;
             }
             return "Unknown death situation";
+        }
+
+        private void CalculateHikerGameScore()
+        {
+            if (m_Hiker.HealthMeter > 80)
+            {
+                m_Hiker.GameScore += 10;
+            }
+            else if (m_Hiker.HealthMeter > 60)
+            {
+                m_Hiker.GameScore += 6;
+            }
+            else if (m_Hiker.HealthMeter > 40)
+            {
+                m_Hiker.GameScore += 4;
+            }
+            else if (m_Hiker.HealthMeter > 20)
+            {
+                m_Hiker.GameScore += 2;
+            }
         }
     }
 }
