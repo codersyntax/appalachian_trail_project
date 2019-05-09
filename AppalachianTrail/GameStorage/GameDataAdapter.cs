@@ -6,7 +6,7 @@ using System.IO;
 
 namespace GameStorage
 {
-    public class GameDataAdapter
+    public class GameDataAdapter : IGameDataAdapter
     {
         private List<TrailSegment> m_TrailSegmentData;
 

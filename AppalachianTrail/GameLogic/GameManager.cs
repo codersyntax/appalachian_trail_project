@@ -10,7 +10,7 @@ namespace GameLogic
     {
         private IGameUIAdapter m_GameUIAdapter;
 
-        private GameDataAdapter m_GameDataAdapter;
+        private IGameDataAdapter m_GameDataAdapter;
 
         private Trail m_Trail;
 

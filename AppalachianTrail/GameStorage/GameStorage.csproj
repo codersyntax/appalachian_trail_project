@@ -54,6 +54,7 @@
     <Compile Include="GameValues\Ration.cs" />
     <Compile Include="GameValues\TravelResponse.cs" />
     <Compile Include="GameValues\Weather.cs" />
+    <Compile Include="IGameDataAdapter.cs" />
     <Compile Include="Model\Location.cs" />
     <Compile Include="Model\TrailSegment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
