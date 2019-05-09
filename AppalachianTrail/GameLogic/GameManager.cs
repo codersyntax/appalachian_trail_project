@@ -188,6 +188,8 @@ namespace GameLogic
 
             m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
 
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.WaterBottle, (int)m_Hiker.CurrentFoodRation);
+
             CalculateHikerHealthBasedOnPace();
 
             CalculateHikerHealthBasedOnFoodRation();
@@ -201,7 +203,9 @@ namespace GameLogic
 
         private void ApplyGameLoopRestDeductions()
         {
-            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation - 1);
+
+            m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.WaterBottle, (int)m_Hiker.CurrentFoodRation - 1);
 
             m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
 
@@ -310,14 +314,18 @@ namespace GameLogic
         {
             bool hasSleepingBag = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.SleepingBag);
             bool hasFood = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.OuncesOfFood);
-
-            if(hasFood && !hasSleepingBag)
+            bool hasWater = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.WaterBottle);
+            if (hasFood && !hasSleepingBag)
             {
                 return "You froze to death without a sleeping bag near " + m_Hiker.CurrentLocation.Name;
             }
-            if(!hasFood)
+            if (!hasFood)
             {
                 return "You starved to death near " + m_Hiker.CurrentLocation.Name;
+            }
+            if (!hasWater)
+            {
+                return "You died of dehydration near " + m_Hiker.CurrentLocation.Name;
             }
             return "Unknown death situation";
         }
