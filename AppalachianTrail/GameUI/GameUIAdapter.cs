@@ -8,15 +8,17 @@ namespace GameUI
 {
     public class GameUIAdapter
     {
+        private GameUIConstants m_GameUIConstants;
         public void Initialize()
         {
+            m_GameUIConstants = new EnglishGameUIConstants();
             SetGameTitle();
             Intro();
         }
 
         private void SetGameTitle()
         {
-            Console.Title = GameUIConstants.ConsoleTitle;
+            Console.Title = m_GameUIConstants.ConsoleTitle;
         }
 
         private void Intro()
@@ -25,7 +27,7 @@ namespace GameUI
             Delay();
             DisplayToUser("And welcome to...");
             Delay();
-            DisplayToUser(GameUIConstants.Title);
+            DisplayToUser(m_GameUIConstants.Title);
             Delay();
             DisplayToUser("You're about to embark on a 2,190 mile journey stretching from Georgia to Maine");
             Delay();
@@ -221,7 +223,7 @@ namespace GameUI
             ClearUserView();
             DisplayToUser("Welcome to the supply store. What would you like to purchase?");
             DisplayToUser("We have the following items in stock.");
-            DisplayToUser(GameUIConstants.ShopItems);
+            DisplayToUser(m_GameUIConstants.ShopItems);
             DisplayToUser("You currently have " + wallet + " to spend.");
             DisplayCurrentShoppingCart(shoppingCart);
             DisplayHikerBackpack(hikerBackpack);
