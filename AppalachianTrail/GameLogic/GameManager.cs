@@ -59,6 +59,8 @@ namespace GameLogic
 
                 while (m_Hiker.DistanceToNextLocation > 0)
                 {
+                    DetermineIfRandomEvent(m_RandomEventChance.Next(0, 30));
+
                     int userTravelResponse = UpdateGameUIToShowTravel();
 
                     while(userTravelResponse != (int)TravelResponse.Continue)
@@ -355,6 +357,55 @@ namespace GameLogic
             else if (m_Hiker.HealthMeter > 20)
             {
                 m_Hiker.GameScore += 2;
+            }
+        }
+
+        private void DetermineIfRandomEvent(int eventType)
+        {
+            switch(eventType)
+            {
+                case 4:
+                    int userResponse = m_GameUIAdapter.GetResponseOnWhetherToFightBear();
+                    if(userResponse == 0)
+                    {
+                        m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
+
+                        m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.OuncesOfFood, (int)m_Hiker.CurrentFoodRation);
+
+                        m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.WaterBottle, (int)m_Hiker.CurrentFoodRation);
+
+                        CalculateHikerHealthBasedOnPace();
+
+                        CalculateHikerHealthBasedOnFoodRation();
+
+                        CalculateHikerHealthBasedOnWeatherAndGear();
+
+                        m_Hiker.CurrentHealthStatus = DetermineHealthStatus();
+
+                        CalculateHikerGameScore();
+                    }
+                    if(userResponse == 1)
+                    {
+                        int bearFightSuccess = m_RandomEventChance.Next(0, 1);
+                        if(bearFightSuccess == 1)
+                        {
+                            m_GameUIAdapter.DisplayBearFightResolution();
+                        }
+                        else
+                        {
+                            m_GameUIAdapter.DisplayGameLoss("You were mauled by a bear. Leonardo Di Caprio would be proud.");
+                        }
+                    }
+                    break;
+                case 8:
+                    if (m_Hiker.Backpack.GetCountOfItems(BackpackItem.SleepingBag) > 0)
+                    {
+                        m_GameUIAdapter.FallOffLedge();
+                        m_Hiker.Backpack.UseItemFromBackpack(BackpackItem.SleepingBag, 1);
+                        m_Hiker.HealthMeter -= 15;
+                        DetermineHealthStatus();
+                    }
+                    break;
             }
         }
     }

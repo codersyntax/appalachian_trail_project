@@ -15,7 +15,7 @@
 ";
 
         public override string ConsoleTitle => "The Appalachian Trail";
-        public override string ShopItems => "1. Water Bottle \t$25 \n" +
+        public override string ShopItems => "1. Water Bottle \t$3 \n" +
                                         "\t2. Sets Of Clothing \t$10 \n" +
                                         "\t3. Tent \t \t$200 \n" +
                                         "\t4. Ounces of Food \t$1 \n" +

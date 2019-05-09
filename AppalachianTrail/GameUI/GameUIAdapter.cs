@@ -107,6 +107,33 @@ namespace GameUI
             return userAnswer;
         }
 
+        public int GetResponseOnWhetherToFightBear()
+        {
+            ClearUserView();
+            DisplayToUser("You run into a bear in the middle of the trail...\n\tDo you take a detour and lose a day of progress? [0]\n\tOr do you fight the bear?... [1]");
+            int userAnswer;
+            bool isValidAnswer = DisplayApproachingBearNotification(out userAnswer);
+            while (!isValidAnswer)
+            {
+                isValidAnswer = DisplayApproachingBearNotification(out userAnswer);
+            }
+            return userAnswer;
+        }
+
+        private bool DisplayApproachingBearNotification(out int numValueOfUserAnswer)
+        {
+            AskUserChoice(m_GameUIConstants.Choice);
+            string userAnswer = Console.ReadLine();
+            bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
+            return isValidAnswer;
+        }
+
+        public void DisplayBearFightResolution()
+        {
+            DisplayToUser("You successfully fended off the bear! Leonardo DiCaprio would be proud.\n\tPress any key to contine...");
+            Console.ReadLine();
+        }
+
 
         private bool DisplayTravelOptions(out int numValueOfUserAnswer)
         {
@@ -347,6 +374,12 @@ namespace GameUI
                     break;
             }
             return ration;
+        }
+
+        public void FallOffLedge()
+        {
+            DisplayToUser("You slipped while traversing a ledge and fell injuring your ankle and losing a sleeping bag.\n\tPress any key to continue...");
+            Console.ReadLine();
         }
     }
 }

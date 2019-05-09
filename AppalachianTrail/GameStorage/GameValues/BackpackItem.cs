@@ -2,7 +2,7 @@
 {
     public enum BackpackItem
     {
-        WaterBottle = 25,
+        WaterBottle = 3,
         SetsOfClothing = 10,
         Tent = 200,
         OuncesOfFood = 1,
