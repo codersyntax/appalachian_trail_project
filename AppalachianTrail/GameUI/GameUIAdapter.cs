@@ -1,7 +1,6 @@
 ﻿using GameStorage.GameValues;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 
 namespace GameUI
@@ -23,27 +22,27 @@ namespace GameUI
 
         private void Intro()
         {
-            DisplayToUser("\nHello traveler");
+            DisplayToUser(GameUIConstants.HelloTraveler);
             Delay();
-            DisplayToUser("And welcome to...");
+            DisplayToUser(GameUIConstants.Welcome);
             Delay();
             DisplayToUser(m_GameUIConstants.Title);
             Delay();
-            DisplayToUser("You're about to embark on a 2,190 mile journey stretching from Georgia to Maine");
+            DisplayToUser(GameUIConstants.Intro);
             Delay();
-            DisplayToUser("You've got a long road ahead so let's get started");
+            DisplayToUser(GameUIConstants.Start);
             Delay();
         }
 
         public string GetName()
         {
-            AskUserChoice("What's your name? ");
+            AskUserChoice(GameUIConstants.PlayerName);
             return Console.ReadLine();
         }
 
         public Occupation GetOccupation()
         {
-            AskUserChoice("What's your occupation? [Doctor, Carpenter, Student, Hippie]: ");
+            AskUserChoice(GameUIConstants.Occupation);
             string occupation = Console.ReadLine();
             bool isValidOccupation = Enum.IsDefined(typeof(Occupation), occupation);
             if(isValidOccupation)
@@ -52,8 +51,8 @@ namespace GameUI
             }
             while(!isValidOccupation)
             {
-                DisplayToUser(occupation + " is not a valid response, please try again...");
-                DisplayToUser("What's your occupation? [Doctor, Carpenter, Student, Hippie] ");
+                DisplayToUser(occupation + GameUIConstants.NotVaild);
+                DisplayToUser(GameUIConstants.Occupation);
                 occupation = Console.ReadLine();
                 isValidOccupation = Enum.IsDefined(typeof(Occupation), occupation);
                 if (isValidOccupation)
@@ -66,7 +65,7 @@ namespace GameUI
 
         public Month GetStartDate()
         {
-            AskUserChoice("When would you like to begin your trek on the AT? \n\t\t(Please specify full month or # of month ex. March or 3): ");
+            AskUserChoice(GameUIConstants.UserStartPoint);
             string startDate = Console.ReadLine();
             bool isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
             int numValueOfStartDate = 0;
@@ -77,8 +76,8 @@ namespace GameUI
             }
             while (!isValidStartDate)
             {
-                DisplayToUser(startDate + " is not a valid response, please try again...");
-                AskUserChoice("When would you like to begin your trek on the AT? (Please specify full month or # of month ex. March or 3) ");
+                DisplayToUser(startDate + GameUIConstants.NotVaildStartDate);
+                AskUserChoice(GameUIConstants.UserStartPoint);
                 startDate = Console.ReadLine();
                 isValidStartDate = Enum.IsDefined(typeof(Month), startDate);
                 if (isValidStartDate)
@@ -92,12 +91,12 @@ namespace GameUI
         public int DisplayTrailSegmentProgression(DateTime currentDate, Weather currentWeather, HealthStatus currentHealthStatus, int amountOfFood, int distanceToNextLocation, int totalDistanceTraveled)
         {
             ClearUserView();
-            DisplayToUser("\n\tDate: " + currentDate.ToLongDateString());
-            DisplayToUser("\tWeather: " + currentWeather.ToString());
-            DisplayToUser("\tHealth: " + currentHealthStatus.ToString());
-            DisplayToUser("\tFood: " + amountOfFood.ToString());
-            DisplayToUser("\tNext landmark: " + distanceToNextLocation.ToString());
-            DisplayToUser("\tMiles traveled: " + totalDistanceTraveled.ToString());
+            DisplayToUser(GameUIConstants.Date + currentDate.ToLongDateString());
+            DisplayToUser(GameUIConstants.Weather + currentWeather.ToString());
+            DisplayToUser(GameUIConstants.Health + currentHealthStatus.ToString());
+            DisplayToUser(GameUIConstants.Food + amountOfFood.ToString());
+            DisplayToUser(GameUIConstants.Landmark + distanceToNextLocation.ToString());
+            DisplayToUser(GameUIConstants.Miles + totalDistanceTraveled.ToString());
             int userAnswer;
             bool isValidAnswer = DisplayTravelOptions(out userAnswer);
             while (!isValidAnswer)
@@ -110,11 +109,11 @@ namespace GameUI
 
         private bool DisplayTravelOptions(out int numValueOfUserAnswer)
         {
-            DisplayToUser("Enter 1 to continue on the trail");
-            DisplayToUser("Enter 2 to rest");
-            DisplayToUser("Enter 3 to change pace");
-            DisplayToUser("Enter 4 to change food rations");
-            AskUserChoice("Your choice: ");
+            DisplayToUser(GameUIConstants.ContinueTrail);
+            DisplayToUser(GameUIConstants.Rest);
+            DisplayToUser(GameUIConstants.ChangePace);
+            DisplayToUser(GameUIConstants.ChangeFoodRatio);
+            AskUserChoice(GameUIConstants.Choice);
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
             return isValidAnswer;
@@ -123,7 +122,7 @@ namespace GameUI
         public int DisplayLocationMenu(string newLocationName)
         {
             ClearUserView();
-            DisplayToUser("\n\tWelcome to " + newLocationName + "!\n");
+            DisplayToUser(GameUIConstants.Welcome + newLocationName + "!\n");
             int userAnswer;
             bool isValidAnswer = DisplayLocationOptions(out userAnswer);
             while (!isValidAnswer)
@@ -135,11 +134,11 @@ namespace GameUI
 
         private bool DisplayLocationOptions(out int numValueOfUserAnswer)
         {
-            DisplayToUser("Enter 1 to purchase some supplies");
-            DisplayToUser("Enter 2 to rest");
-            DisplayToUser("Enter 3 to speak with the townsfolk");
-            DisplayToUser("Enter 4 to continue to the next trailhead");
-            AskUserChoice("Your choice: ");
+            DisplayToUser(GameUIConstants.PurchaseSupplies);
+            DisplayToUser(GameUIConstants.Rest);
+            DisplayToUser(GameUIConstants.SpeakTownsfolk);
+            DisplayToUser(GameUIConstants.ContinueTrailhead);
+            AskUserChoice(GameUIConstants.Choice);
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
             return isValidAnswer;
@@ -147,7 +146,7 @@ namespace GameUI
 
         public int DisplayGameWin()
         {
-            DisplayToUser("Congrats traveller! You made it to Rangeley, ME! Would you like to record your high score? ");
+            DisplayToUser(GameUIConstants.EndGame);
             int userAnswer;
             bool isValidAnswer = DisplayHighScoreOptions(out userAnswer);
             while (!isValidAnswer)
@@ -159,7 +158,7 @@ namespace GameUI
 
         public int DisplayGameLoss(string reasonOfDeath)
         {
-            DisplayToUser(reasonOfDeath + " Would you like to record your high score? ");
+            DisplayToUser(reasonOfDeath + GameUIConstants.RecordHighScore);
             int userAnswer;
             bool isValidAnswer = DisplayHighScoreOptions(out userAnswer);
             while (!isValidAnswer)
@@ -171,31 +170,12 @@ namespace GameUI
 
         private bool DisplayHighScoreOptions(out int numValueOfUserAnswer)
         {
-            DisplayToUser("Enter 1 to record your high score");
-            DisplayToUser("Enter 2 to quit");
-            AskUserChoice("Your choice: ");
+            DisplayToUser(GameUIConstants.EnterHighScore);
+            DisplayToUser(GameUIConstants.Quit);
+            AskUserChoice(GameUIConstants.Choice);
             string userAnswer = Console.ReadLine();
             bool isValidAnswer = Int32.TryParse(userAnswer, out numValueOfUserAnswer);
             return isValidAnswer;
-        }
-
-        public void DisplayHighScoreMenu(string[] highScores)
-        {
-            List<KeyValuePair<string, int>> HighScores = new List<KeyValuePair<string, int>>();
-            foreach(string score in highScores)
-            {
-                string[] scoreArray = score.Split('/');
-                HighScores.Add(new KeyValuePair<string, int>(scoreArray[0], Int32.Parse(scoreArray[1])));
-            }
-            var sortedHighScores = HighScores.OrderBy(x => x.Value);
-            ClearUserView();
-            DisplayToUser("The Appalachian Trail All Time High Scores");
-            foreach(var score in sortedHighScores)
-            {
-                DisplayToUser("\n\t\tHiker: " + score.Key + "\n\t\tScore: " + score.Value + "\n");
-            }
-            Console.ReadLine();
-            Environment.Exit(0);
         }
 
         private void DisplayToUser(string message)
@@ -221,13 +201,13 @@ namespace GameUI
         public bool StartShopping (int wallet, Dictionary<BackpackItem, int> hikerBackpack, Dictionary<BackpackItem, int> shoppingCart)
         {
             ClearUserView();
-            DisplayToUser("Welcome to the supply store. What would you like to purchase?");
-            DisplayToUser("We have the following items in stock.");
-            DisplayToUser(m_GameUIConstants.ShopItems);
-            DisplayToUser("You currently have " + wallet + " to spend.");
+            DisplayToUser(GameUIConstants.WelcomeSupplyStore);
+            DisplayToUser(GameUIConstants.SupplyStoreItems);
+            DisplayToUser(GameUIConstants.ShopItems);
+            DisplayToUser(GameUIConstants.Currently + wallet + GameUIConstants.Spend);
             DisplayCurrentShoppingCart(shoppingCart);
             DisplayHikerBackpack(hikerBackpack);
-            AskUserChoice("Would you like to purchase anything? (Y/N): ");
+            AskUserChoice(GameUIConstants.PurchaseQuestion);
             var purchaseResponse = Console.ReadLine().ToLower();
             if(purchaseResponse == "y")
             {
@@ -241,7 +221,7 @@ namespace GameUI
 
         private void DisplayCurrentShoppingCart(Dictionary<BackpackItem, int> shoppingCart)
         {
-            DisplayToUser("\n\tYour current shopping cart items");
+            DisplayToUser(GameUIConstants.CurrentCart);
             foreach (var item in shoppingCart)
             {
                 DisplayToUser("\t" + item.Key.ToString() + " : " + item.Value.ToString());
@@ -251,7 +231,7 @@ namespace GameUI
 
         private void DisplayHikerBackpack(Dictionary<BackpackItem, int> hikerBackpack)
         {
-            DisplayToUser("\n\tYour current back pack items");
+            DisplayToUser(GameUIConstants.CurrentBackpack);
             foreach (var item in hikerBackpack)
             {
                 DisplayToUser("\t" + item.Key.ToString() + " : " + item.Value.ToString());
@@ -261,7 +241,7 @@ namespace GameUI
 
         public BackpackItem PurchaseShoppingItem(out int itemPurchaseCount)
         {
-            AskUserChoice("Select an item to purchase [1-5]: ");
+            AskUserChoice(GameUIConstants.SelectItem);
             string purchasedItemString = Console.ReadLine();
             BackpackItem purchasedItem;
             switch(purchasedItemString)
@@ -285,7 +265,7 @@ namespace GameUI
                     purchasedItem = BackpackItem.None;
                     break;
             }
-            AskUserChoice("How many would you like to purchase?: ");
+            AskUserChoice(GameUIConstants.PurchaseSize);
             string purchaseAmountString = Console.ReadLine();
             Int32.TryParse(purchaseAmountString, out itemPurchaseCount);
             return purchasedItem;
@@ -293,16 +273,16 @@ namespace GameUI
 
         public void DisplayInsufficientFunds()
         {
-            DisplayToUser("You don't have enough money for that");
+            DisplayToUser(GameUIConstants.InsufficientFunds);
             Console.ReadLine();
         }
 
         public Pace GetPaceChange(Pace currentPace)
         {
-            DisplayToUser("What pace would you like to hike at?");
-            DisplayToUser("[1] Strenuous / [2] Steady / [3] Slow");
-            DisplayToUser("Your current pace: " + currentPace.ToString());
-            AskUserChoice("Your choice: ");
+            DisplayToUser(GameUIConstants.PaceQuestion);
+            DisplayToUser(GameUIConstants.PaceOptions);
+            DisplayToUser(GameUIConstants.CurrentPace + currentPace.ToString());
+            AskUserChoice(GameUIConstants.Choice);
             string userResponse = Console.ReadLine();
             Pace pace;
             switch (userResponse)
@@ -325,10 +305,10 @@ namespace GameUI
 
         public Ration GetRationChange(Ration currentRation)
         {
-            DisplayToUser("How much food rations would you like to consume?");
-            DisplayToUser("[1] Filling / [2] Meager / [3] Bare bones");
-            DisplayToUser("Your current food rations: " + currentRation);
-            AskUserChoice("Your choice: ");
+            DisplayToUser(GameUIConstants.FoodRationQuestion);
+            DisplayToUser(GameUIConstants.FoodRationOption);
+            DisplayToUser(GameUIConstants.CurrentFoodRation + currentRation);
+            AskUserChoice(GameUIConstants.Choice);
             string userResponse = Console.ReadLine();
             Ration ration;
             switch (userResponse)
