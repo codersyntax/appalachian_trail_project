@@ -4,7 +4,7 @@
     {
         Shop = 1,
         Rest = 2,
-        Talk = 3,
-        Continue = 4
+        Continue = 3,
+        Talk = 4
     }
 }

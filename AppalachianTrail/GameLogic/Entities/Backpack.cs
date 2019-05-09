@@ -36,6 +36,10 @@ namespace GameLogic.Entities
             if(Items.ContainsKey(itemName))
             {
                 Items[itemName] -= amountUsed;
+                if(Items[itemName] <= 0)
+                {
+                    Items.Remove(itemName);
+                }
             }
         }
     }

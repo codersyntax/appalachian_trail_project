@@ -137,7 +137,7 @@ namespace GameUI
         {
             DisplayToUser(m_GameUIConstants.PurchaseSupplies);
             DisplayToUser(m_GameUIConstants.Rest);
-            DisplayToUser(m_GameUIConstants.SpeakTownsfolk);
+            //DisplayToUser(m_GameUIConstants.SpeakTownsfolk);
             DisplayToUser(m_GameUIConstants.ContinueTrailhead);
             AskUserChoice(m_GameUIConstants.Choice);
             string userAnswer = Console.ReadLine();

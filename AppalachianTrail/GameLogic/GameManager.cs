@@ -169,10 +169,10 @@ namespace GameLogic
             {
                 m_Hiker.CurrentDate = m_Hiker.CurrentDate.AddDays(1);
             }
-            if(userResponse == (int)LocationResponse.Talk)
-            {
-                //talk to towns people
-            }
+            //if(userResponse == (int)LocationResponse.Talk)
+            //{
+            //    //talk to towns people
+            //}
             return userResponse;
         }
 
@@ -274,6 +274,14 @@ namespace GameLogic
 
         private HealthStatus DetermineHealthStatus()
         {
+            if (m_Hiker.Backpack.GetCountOfItems(BackpackItem.OuncesOfFood) <= 0)
+            {
+                return HealthStatus.Dead;
+            }
+            if (m_Hiker.Backpack.GetCountOfItems(BackpackItem.WaterBottle) <= 0)
+            {
+                return HealthStatus.Dead;
+            }
             if (m_Hiker.HealthMeter > 80)
             {
                 return HealthStatus.Good;
@@ -299,7 +307,7 @@ namespace GameLogic
         private void CalculateHikerHealthBasedOnWeatherAndGear()
         {
             Weather LocationWeather = m_Hiker.CurrentLocation.AverageWeatherForEachMonth[m_Hiker.CurrentDate.Month];
-            bool hasSleepingBag = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.SleepingBag);
+            bool hasSleepingBag = m_Hiker.Backpack.GetCountOfItems(BackpackItem.SleepingBag) > 0;
             if (LocationWeather == Weather.Cold && !hasSleepingBag)
             {
                 m_Hiker.HealthMeter = 0;
@@ -313,8 +321,8 @@ namespace GameLogic
         private string DetermineReasonForDeath()
         {
             bool hasSleepingBag = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.SleepingBag);
-            bool hasFood = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.OuncesOfFood);
-            bool hasWater = m_Hiker.Backpack.Items.ContainsKey(BackpackItem.WaterBottle);
+            bool hasFood = m_Hiker.Backpack.GetCountOfItems(BackpackItem.OuncesOfFood) > 0;
+            bool hasWater = m_Hiker.Backpack.GetCountOfItems(BackpackItem.WaterBottle) > 0;
             if (hasFood && !hasSleepingBag)
             {
                 return "You froze to death without a sleeping bag near " + m_Hiker.CurrentLocation.Name;

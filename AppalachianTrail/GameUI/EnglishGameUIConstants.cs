@@ -42,8 +42,8 @@
         public override string ChangeFoodRatio => "Enter 4 to change food rations";
         public override string Choice => "Your choice: ";
         public override string PurchaseSupplies => "Enter 1 to purchase some supplies";
-        public override string SpeakTownsfolk => "Enter 3 to speak with the townsfolk";
-        public override string ContinueTrailhead => "Enter 4 to continue to the next trailhead";
+        public override string ContinueTrailhead => "Enter 3 to continue to the next trailhead";
+        public override string SpeakTownsfolk => "Enter 4 to speak with the townsfolk";
         public override string EndGame => "Congrats traveller! You made it to Rangeley, ME! Would you like to record your high score? ";
         public override string RecordHighScore => " Would you like to record your high score? ";
         public override string EnterHighScore => "Enter 1 to record your high score";
