@@ -43,7 +43,14 @@ namespace GameLogic.Entities
             else
             {
                 m_Hiker.Wallet -= (int)itemPurchased * purchaseAmount;
-                ShoppingCart.Add(itemPurchased, purchaseAmount);
+                if(ShoppingCart.ContainsKey(itemPurchased))
+                {
+                    ShoppingCart[itemPurchased] += purchaseAmount;
+                }
+                else
+                {
+                    ShoppingCart.Add(itemPurchased, purchaseAmount);
+                }
             }
         }
     }
